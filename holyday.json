@@ -26,7 +26,7 @@ half
 {"name":"Ana","slides": [640, 762, 311, 496],  "background": "backgrounds/1.png", "title":"Ana", "holidays":["roshChodesh", "null-chanukah"]},
 {"name":"Baruch Haba","slides": [640, 762, 311, 497],  "background": "backgrounds/1.png", "title":"Baruch Haba", "holidays":["roshChodesh", "null-chanukah"]},
 {"name":"Yehalelucha","slides": [642, 762, 311, 498],  "background": "backgrounds/1.png", "title":"Yehalelucha", "holidays":["roshChodesh", "null-chanukah"]}
-
+ 
 Chanukah
 {"name":"Chanukah Day 1","slides": [["948-949",490,589,1074]],  "background": "backgrounds/1.png", "title":"Chanukah Day 1", "holiday":"chanukah"}
 {"name":"Chanukah Day 2","slides": [[949,"490-491",589,1074]],  "background": "backgrounds/1.png", "title":"Chanukah Day 2", "holiday":"chanukah"}
