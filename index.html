@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>T'fillah</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="controls">
+      <div class="control-group">
+        <span class="label">Group:</span>
+        <div class="button-row">
+          <button class="set-btn" data-set="ashkenazi">Ashkenazi</button>
+          <button class="set-btn" data-set="sephardic">Sephardic</button>
+          <button class="set-btn" data-set="mixed">Mixed</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <button id="fullscreenBtn">Fullscreen</button>
+      </div>
+    </header>
+
+    <main class="slideshow" id="slideshow">
+      <img id="slideImage" alt="Slideshow image" />
+      <div class="slide-title" id="slideTitle"></div>
+      <img id="slideLogo" class="slide-logo" alt="Slide logo" />
+      <div class="siddur-layer" aria-hidden="true">
+        <img id="siddur1" class="siddur siddur-1" alt="" />
+        <div class="slide-number" id="slideNumber">0</div>
+        <img id="siddur4" class="siddur siddur-4" alt="" />
+        <img id="siddur2" class="siddur siddur-2" alt="" />
+        <img id="siddur3" class="siddur siddur-3" alt="" />
+      </div>
+      <button class="nav prev" id="prevBtn" aria-label="Previous image">Prev</button>
+      <button class="nav next" id="nextBtn" aria-label="Next image">Next</button>
+      <div class="counter" id="counter"></div>
+    </main> 
+    <script src="script.js"></script>
+  </body> 
+</html>
+ 
