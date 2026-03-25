@@ -70,13 +70,31 @@ const parshaNameAliases = {
   "Sh'lach": "Shelach",
   Vaetchanan: "Va'etchanan"
 };
+const hanukkahTorahNameByHolidayTitle = {
+  "chanukah: 2 candles": "Chanukah Day 1",
+  "chanukah: 3 candles": "Chanukah Day 2",
+  "chanukah: 4 candles": "Chanukah Day 3",
+  "chanukah: 5 candles": "Chanukah Day 4",
+  "chanukah: 6 candles": "Chanukah Day 5",
+  "chanukah: 7 candles": "Chanukah Day 6",
+  "chanukah: 8 candles": "Chanukah Day 7",
+  "chanukah: 8th day": "Chanukah Day 8",
+  "hanukkah: 2 candles": "Chanukah Day 1",
+  "hanukkah: 3 candles": "Chanukah Day 2",
+  "hanukkah: 4 candles": "Chanukah Day 3",
+  "hanukkah: 5 candles": "Chanukah Day 4",
+  "hanukkah: 6 candles": "Chanukah Day 5",
+  "hanukkah: 7 candles": "Chanukah Day 6",
+  "hanukkah: 8 candles": "Chanukah Day 7",
+  "hanukkah: 8th day": "Chanukah Day 8"
+};
 
 const toText = (value) => String(value ?? "").trim();
 const setDisplay = (element, showElement) => {
   element.style.display = showElement ? "block" : "none";
 };
 
-const holidayIds = ["chanukah", "roshChodesh", "succos", "fastDay", "shabbat", "fools", "belated"];
+const holidayIds = ["chanukah", "roshChodesh", "succos", "fastDay", "shabbat", "purim", "fools", "belated"];
 
 const clampSlideIndex = (index, length) => {
   if (!Number.isInteger(index) || length <= 0) return 0;
@@ -141,6 +159,7 @@ const createEmptyHolidayFlags = () => ({
   succos: false,
   fastDay: false,
   shabbat: false,
+  purim: false,
   fools: false,
   belated: false
 });
@@ -157,6 +176,7 @@ const normalizeHolidayKey = (value) => {
   else if (["succos", "sukkos", "succot", "sukkot"].includes(normalized)) holidayKey = "succos";
   else if (["fast", "fastday", "fastdays", "taanit", "taanit", "tzom"].includes(normalized)) holidayKey = "fastDay";
   else if (["shabbat", "shabbos"].includes(normalized)) holidayKey = "shabbat";
+  else if (["purim", "shushanpurim"].includes(normalized)) holidayKey = "purim";
   else if (["fools", "aprilfools", "aprilfool"].includes(normalized)) holidayKey = "fools";
   else if (["belated"].includes(normalized)) holidayKey = "belated";
 
@@ -390,6 +410,10 @@ const getEffectiveNow = () => {
 };
 
 const resolveCurrentDayId = () => {
+  if (activeHolidayFlags.chanukah) {
+    return "monday";
+  }
+
   const params = new URLSearchParams(window.location.search);
   const dayOverride = toText(params.get("day")).toLowerCase();
   if (dayOverride && dropdownOptions.some((option) => option.id === dayOverride)) {
@@ -430,6 +454,52 @@ const resolveCurrentParsha = async () => {
     entry: matchedEntry,
     label: lookupName
   };
+};
+
+const resolveCurrentTorahReading = async () => {
+  const today = getEffectiveNow();
+  const date = formatDateForApi(today);
+  const requestUrl = `${holidayApiBaseUrl}?v=1&cfg=json&start=${date}&end=${date}&maj=on&min=on&mod=on&nx=on&mf=on&ss=off&c=off&geo=none&M=on&s=off`;
+
+  try {
+    const response = await fetch(requestUrl);
+    if (response.ok) {
+      const data = await response.json();
+      const items = Array.isArray(data?.items) ? data.items : [];
+      const hanukkahItem = items.find((item) => {
+        const title = normalizeHolidayTitle(item?.title || item?.title_orig);
+        return title.includes("chanukah") || title.includes("hanukkah");
+      });
+
+      if (hanukkahItem) {
+        const holidayTitle = normalizeHolidayTitle(hanukkahItem?.title || hanukkahItem?.title_orig);
+        const hanukkahName = hanukkahTorahNameByHolidayTitle[holidayTitle];
+        const matchedEntry = hanukkahName ? findParshaEntryByName(hanukkahName) : null;
+
+        if (matchedEntry) {
+          return {
+            entry: matchedEntry,
+            label: matchedEntry.name
+          };
+        }
+      }
+
+      const isRoshChodesh = items.some((item) => normalizeHolidayTitle(item?.title || item?.title_orig) === "rosh chodesh");
+      if (isRoshChodesh) {
+        const matchedEntry = findParshaEntryByName("Rosh Chodesh");
+        if (matchedEntry) {
+          return {
+            entry: matchedEntry,
+            label: matchedEntry.name
+          };
+        }
+      }
+    }
+  } catch {
+    // Fall back to the weekly parsha lookup below.
+  }
+
+  return resolveCurrentParsha();
 };
 
 const normalizeHolidayTitle = (value) =>
@@ -486,6 +556,10 @@ const resolveActiveHolidays = async () => {
 
     if (title.includes("chanukah") || title.includes("hanukkah")) {
       nextHolidayFlags.chanukah = true;
+    }
+
+    if (title.includes("purim")) {
+      nextHolidayFlags.purim = true;
     }
 
     if (["sukkot", "sukkos", "succot", "succos"].some((term) => title.includes(term))) {
@@ -825,7 +899,7 @@ const initializeFromSlidesData = async () => {
   activeParshaLabel = selectedParshaName;
 
   try {
-    const currentParsha = await resolveCurrentParsha();
+    const currentParsha = await resolveCurrentTorahReading();
     if (currentParsha?.entry?.name) {
       selectedParshaName = currentParsha.entry.name;
       activeParshaLabel = currentParsha.entry.name;

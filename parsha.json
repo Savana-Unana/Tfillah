@@ -52,5 +52,14 @@
       { "name": "Nitzavim", "ashkenaz_page": 946, "sephardi_page": 1071, "Chabad": 561, "translated": 586 },
       { "name": "Vayeilech", "ashkenaz_page": 947, "sephardi_page": 1072, "Chabad": 562, "translated": 587 },
       { "name": "Ha'azinu", "ashkenaz_page": 947, "sephardi_page": 1073, "Chabad": 562, "translated": 587 },
-      { "name": "V'Zot HaBerachah", "ashkenaz_page": 947, "sephardi_page": 1073, "Chabad": 563, "translated": 588 }
+      { "name": "V'Zot HaBerachah", "ashkenaz_page": 947, "sephardi_page": 1073, "Chabad": 563, "translated": 588 },
+      { "name": "Rosh Chodesh", "ashkenaz_page": 948, "sephardi_page": 768, "Chabad": 469, "translated": "503-516" },
+      { "name": "Chanukah Day 1", "ashkenaz_page": "948-949", "sephardi_page": 1074, "Chabad": 490, "translated": 589 },
+      { "name": "Chanukah Day 2", "ashkenaz_page": 949, "sephardi_page": 1074, "Chabad": "490-491", "translated": 589 },
+      { "name": "Chanukah Day 3", "ashkenaz_page": 949, "sephardi_page": 1075, "Chabad": 491, "translated": "589-590" },
+      { "name": "Chanukah Day 4", "ashkenaz_page": 949, "sephardi_page": 1075, "Chabad": "491-492", "translated": 590 },
+      { "name": "Chanukah Day 5", "ashkenaz_page": "949-950", "sephardi_page": 1076, "Chabad": 492, "translated": 590 },
+      { "name": "Chanukah Day 6", "ashkenaz_page": 950, "sephardi_page": 1076, "Chabad": "492-493", "translated": "590-591" },
+      { "name": "Chanukah Day 7", "ashkenaz_page": "950-951", "sephardi_page": 1077, "Chabad": "493-494", "translated": "591-592" },
+      { "name": "Chanukah Day 8", "ashkenaz_page": "951-952", "sephardi_page": 1078, "Chabad": "494-495", "translated": "592-593" }
 ]
