@@ -151,7 +151,9 @@ button:disabled {
   margin: 0;
   border-radius: 0;
   border: none;
-  background: #161f20;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(48, 74, 75, 0.36), rgba(22, 31, 32, 0.92) 58%),
+    #161f20;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -163,6 +165,16 @@ button:disabled {
     0 24px 60px rgba(0, 0, 0, 0.34),
     inset 0 0 0 1px rgba(255, 228, 176, 0.1);
   z-index: 1;
+}
+
+:fullscreen .slideshow,
+.slideshow:fullscreen,
+:-webkit-full-screen .slideshow,
+.slideshow:-webkit-full-screen {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #161f20;
 }
 
 .slideshow.is-clickable {
@@ -202,6 +214,28 @@ button:disabled {
   pointer-events: none;
   opacity: 1;
   transition: opacity 150ms ease;
+}
+
+.slide-title.is-parsha-reading {
+  top: calc(clamp(20px, 3vw, 36px) + 150px);
+}
+
+.slide-title.is-parsha-reading-ashkenazi-weekday {
+  top: calc(clamp(20px, 3vw, 36px) + 80px);
+}
+
+:fullscreen .slide-title.is-parsha-reading,
+.slideshow:fullscreen .slide-title.is-parsha-reading,
+:-webkit-full-screen .slide-title.is-parsha-reading,
+.slideshow:-webkit-full-screen .slide-title.is-parsha-reading {
+  top: calc(clamp(20px, 3vw, 36px) + 200px);
+}
+
+:fullscreen .slide-title.is-parsha-reading-ashkenazi-weekday,
+.slideshow:fullscreen .slide-title.is-parsha-reading-ashkenazi-weekday,
+:-webkit-full-screen .slide-title.is-parsha-reading-ashkenazi-weekday,
+.slideshow:-webkit-full-screen .slide-title.is-parsha-reading-ashkenazi-weekday {
+  top: calc(clamp(20px, 3vw, 36px) + 130px);
 }
 
 .slide-logo {

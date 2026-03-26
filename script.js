@@ -736,7 +736,18 @@ const renderCurrentSlide = () => {
 
   const baseTitle = getSlideTitle(currentEntry, currentSlideIndex);
   const parshaTitle = activeParshaLabel || selectedParshaName;
-  const titleText = entryIsTorah && parshaTitle ? `${baseTitle} : ${parshaTitle}` : baseTitle;
+  const isParshaReadingSlide = backgroundImage === "backgrounds/30.png";
+  const isAshkenaziWeekdayParshaReading = currentSetId === "ashkenazi" && ["monday", "thursday"].includes(currentDayId);
+  const titleText = entryIsTorah && parshaTitle
+    ? isParshaReadingSlide
+      ? `Parsha: ${parshaTitle}`
+      : `${baseTitle} : ${parshaTitle}`
+    : baseTitle;
+  slideTitleElement.classList.toggle("is-parsha-reading", entryIsTorah && isParshaReadingSlide && !!parshaTitle);
+  slideTitleElement.classList.toggle(
+    "is-parsha-reading-ashkenazi-weekday",
+    entryIsTorah && isParshaReadingSlide && !!parshaTitle && isAshkenaziWeekdayParshaReading
+  );
   setSlideTitle(titleText);
   setSlideLogo(currentEntry.logo !== undefined ? currentEntry.logo : brandingSettings.logo);
 
