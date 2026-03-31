@@ -665,13 +665,34 @@ const getActiveSiddurSlots = () => {
 const positionSiddursOverSlideDigits = (activeSiddurSlots) => {
   const slideDigitElements = Array.from(slideNumberElement.querySelectorAll(".slide-digit"));
   const slideshowRect = slideshowElement.getBoundingClientRect();
+  const positionedSlots = [];
 
   activeSiddurSlots.forEach(({ element, slotIndex }) => {
     const digitElement = slideDigitElements[slotIndex];
     if (!digitElement || element.style.display === "none") return;
 
     const digitRect = digitElement.getBoundingClientRect();
-    element.style.left = `${digitRect.left - slideshowRect.left + digitRect.width / 2}px`;
+    const centerX = digitRect.left - slideshowRect.left + digitRect.width / 2;
+    positionedSlots.push({ element, centerX });
+  });
+
+  if (!positionedSlots.length) return;
+
+  positionedSlots.forEach(({ element, centerX }) => {
+    element.style.left = `${centerX}px`;
+  });
+
+  const groupLeft = Math.min(
+    ...positionedSlots.map(({ element }) => parseFloat(element.style.left) - element.offsetWidth / 2)
+  );
+  const groupRight = Math.max(
+    ...positionedSlots.map(({ element }) => parseFloat(element.style.left) + element.offsetWidth / 2)
+  );
+  const groupCenterX = (groupLeft + groupRight) / 2;
+  const centerOffset = slideshowRect.width / 2 - groupCenterX;
+
+  positionedSlots.forEach(({ element, centerX }) => {
+    element.style.left = `${centerX + centerOffset}px`;
   });
 };
 

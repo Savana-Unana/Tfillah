@@ -263,25 +263,25 @@ button:disabled {
 
 .siddur {
   position: absolute;
-  width: min(28vw, 290px);
-  max-height: 440px; 
-  height: auto; 
+  width: auto;
+  height: clamp(250px, 29.6vw, 334px);
+  max-width: none;
   border-radius: 24px;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.52));
-  top: calc(60% - clamp(205px, 24vw, 310px));
+  top: calc(64% - clamp(198px, 21vw, 268px));
   left: calc(((var(--slot-index, 0) + 1) * 100%) / (var(--slot-count, 4) + 1));
   transform: translateX(-50%);
 }
 
 .slide-number {
   position: absolute;
-  top: 80%;
+  top: 78%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: clamp(93px, 12vw, 192px);
-  font-size: clamp(1.2rem, 4.2vw, 2.8rem);
+  font-size: clamp(1rem, 3.4vw, 2.35rem);
   font-weight: 700; 
   color: rgba(255, 247, 226, 0.96);
   letter-spacing: 0.04em;
@@ -297,16 +297,16 @@ button:disabled {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: clamp(130px, 13vw, 190px);
-  flex: 0 0 clamp(130px, 13vw, 190px);
+  width: clamp(118px, 11.6vw, 168px);
+  flex: 0 0 clamp(118px, 11.6vw, 168px);
   font-family: "Open Sauce One", "Open Sauce", "Segoe UI", sans-serif;
   text-align: center;
   letter-spacing: 0;
-  line-height: 1.05;
+  line-height: 1;
   color: #ffffff;
   background: #000000;
-  border-radius: 16px;
-  padding: 8px 10px;
+  border-radius: 13px;
+  padding: 3px 10px 5px;
   white-space: nowrap;
   word-break: keep-all;
 }
@@ -321,12 +321,12 @@ button:disabled {
 }
 
 .slideshow.is-mixed .slide-digit {
-  width: clamp(104px, 10vw, 150px);
-  flex: 0 0 clamp(104px, 10vw, 150px);
+  width: clamp(92px, 8.9vw, 132px);
+  flex: 0 0 clamp(92px, 8.9vw, 132px);
 }
 
 .slideshow.is-mixed .siddur {
-  width: min(22vw, 230px);
+  height: clamp(231px, 24.6vw, 278px);
 }
 
 .nav {
@@ -439,12 +439,12 @@ button:disabled {
   }
 
   .siddur {
-    width: min(28vw, 220px);
-    top: calc(69% - clamp(138px, 23vw, 186px));
+    height: clamp(231px, 30.4vw, 278px);
+    top: calc(68% - clamp(154px, 19.8vw, 199px));
   }
 
   .slideshow.is-mixed .siddur {
-    width: min(22vw, 180px);
+    height: clamp(212px, 23.9vw, 242px);
   }
 
   .slide-title {
@@ -474,12 +474,12 @@ button:disabled {
   }
 
   .slide-number {
-    top: 76%;
+    top: 75%;
   }
 
   .siddur {
-    width: min(33vw, 155px);
-    top: calc(67% - clamp(112px, 26vw, 142px));
+    height: clamp(194px, 30.9vw, 231px);
+    top: calc(68% - clamp(125px, 25.8vw, 156px));
   }
 
   .slideshow.is-mixed .slide-number {
@@ -487,12 +487,12 @@ button:disabled {
   }
 
   .slideshow.is-mixed .slide-digit {
-    width: clamp(72px, 14vw, 110px);
-    flex: 0 0 clamp(72px, 14vw, 110px);
+    width: clamp(65px, 12.6vw, 97px);
+    flex: 0 0 clamp(65px, 12.6vw, 97px);
   }
 
   .slideshow.is-mixed .siddur {
-    width: min(24vw, 132px);
+    height: clamp(175px, 26.5vw, 200px);
   }
 
   .slide-title {
