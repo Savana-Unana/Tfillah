@@ -879,6 +879,16 @@ fullscreenButton.addEventListener("click", () => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") stepSlide(-1);
   if (event.key === "ArrowRight") stepSlide(1);
+  if (event.key === "ArrowUp") stepSlide(-1);
+  if (event.key === "ArrowDown") stepSlide(1);
+  if (event.key === "PageUp") {
+    event.preventDefault();
+    stepSlide(-1);
+  }
+  if (event.key === "PageDown") {
+    event.preventDefault();
+    stepSlide(1);
+  }
 
   if (event.key === " " || event.code === "Space" || event.key === "Spacebar") {
     event.preventDefault();
