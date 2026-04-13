@@ -90,6 +90,19 @@ const hanukkahTorahNameByHolidayTitle = {
 };
 
 const toText = (value) => String(value ?? "").trim();
+const normalizeEntryName = (value) =>
+  toText(value)
+    .toLowerCase()
+    .replace(/[’']/g, "'")
+    .replace(/[\s_-]+/g, " ")
+    .trim();
+
+const getBaseSetId = (setId) => {
+  if (setId === "mixedAsh") return "ashkenazi";
+  if (setId === "mixedSep") return "sephardic";
+  return setId;
+};
+
 const setDisplay = (element, showElement) => {
   element.style.display = showElement ? "block" : "none";
 };
@@ -151,6 +164,56 @@ const getComboEntries = (combos, setId, dayId) => {
 
   const dayEntry = setEntry[dayId] || setEntry.all;
   return Array.isArray(dayEntry) ? dayEntry : [];
+};
+
+const ensureButtonOption = (options, buttonId, label) => {
+  if (options.some((option) => option.id === buttonId)) return options;
+  return [...options, { id: buttonId, label, background: "" }];
+};
+
+const getUnmatchedEntries = (baseEntries, extraEntries) => {
+  const baseNames = new Set(
+    baseEntries
+      .map((entry) => normalizeEntryName(entry?.name))
+      .filter(Boolean)
+  );
+
+  return extraEntries.filter((entry) => {
+    const entryName = normalizeEntryName(entry?.name);
+    return !entryName || !baseNames.has(entryName);
+  });
+};
+
+const buildMergedSetEntries = (primaryEntries, secondaryEntries) => [
+  ...primaryEntries,
+  ...getUnmatchedEntries(primaryEntries, secondaryEntries)
+];
+
+const buildDerivedMixedCombos = (combos) => {
+  const ashkenaziCombos = combos?.ashkenazi;
+  const sephardicCombos = combos?.sephardic;
+  if (!ashkenaziCombos || !sephardicCombos) return combos || {};
+
+  const dayIds = new Set([
+    ...Object.keys(ashkenaziCombos || {}),
+    ...Object.keys(sephardicCombos || {})
+  ]);
+
+  const mixedAsh = {};
+  const mixedSep = {};
+
+  dayIds.forEach((dayId) => {
+    const ashEntries = getComboEntries(combos, "ashkenazi", dayId);
+    const sephardicEntries = getComboEntries(combos, "sephardic", dayId);
+    mixedAsh[dayId] = buildMergedSetEntries(ashEntries, sephardicEntries);
+    mixedSep[dayId] = buildMergedSetEntries(sephardicEntries, ashEntries);
+  });
+
+  return {
+    ...combos,
+    mixedAsh,
+    mixedSep
+  };
 };
 
 const createEmptyHolidayFlags = () => ({
@@ -345,7 +408,15 @@ const getTorahSlidesForSelectedParsha = () => {
     return [parsha.ashkenazPage, parsha.chabadPage, parsha.translatedPage];
   }
 
+  if (currentSetId === "mixedAsh") {
+    return [parsha.ashkenazPage, parsha.chabadPage, parsha.translatedPage];
+  }
+
   if (currentSetId === "sephardic") {
+    return [parsha.sephardiPage, parsha.chabadPage, parsha.translatedPage];
+  }
+
+  if (currentSetId === "mixedSep") {
     return [parsha.sephardiPage, parsha.chabadPage, parsha.translatedPage];
   }
 
@@ -637,7 +708,8 @@ const isValidPageNumber = (value) => {
 };
 
 const getActiveSiddurSlots = () => {
-  const siddur1Source = siddurSettings.siddur1?.[currentSetId] || "";
+  const activeBaseSetId = getBaseSetId(currentSetId);
+  const siddur1Source = siddurSettings.siddur1?.[activeBaseSetId] || "";
   const siddur2Source = siddurSettings.siddur2 || "";
   const siddur3Source = siddurSettings.siddur3 || "";
   const siddur4Source = siddurSettings.siddur4 || "";
@@ -651,7 +723,7 @@ const getActiveSiddurSlots = () => {
     ];
   }
 
-  if (currentSetId === "ashkenazi" || currentSetId === "sephardic") {
+  if (["ashkenazi", "sephardic", "mixedAsh", "mixedSep"].includes(currentSetId)) {
     return [
       { element: siddurSlot1Element, source: siddur1Source },
       { element: siddurSlot2Element, source: siddur2Source },
@@ -977,6 +1049,8 @@ Promise.all([
 ])
   .then(async ([slidesData, parshaData, holidayFlags]) => {
     buttonOptions = parseOptions(slidesData.buttons);
+    buttonOptions = ensureButtonOption(buttonOptions, "mixedAsh", "MixedAsh");
+    buttonOptions = ensureButtonOption(buttonOptions, "mixedSep", "MixedSep");
     dropdownOptions = parseOptions(slidesData.dropdowns);
 
     buttonBackgroundById = buttonOptions.reduce((map, option) => {
@@ -989,9 +1063,19 @@ Promise.all([
       return map;
     }, {});
 
-    slideCombos = slidesData.combos || {};
+    slideCombos = buildDerivedMixedCombos(slidesData.combos || {});
     siddurSettings = {
-      siddur1: slidesData.siddurs?.siddur1 || { ashkenazi: "", sephardic: "" },
+      siddur1: {
+        ...(slidesData.siddurs?.siddur1 || { ashkenazi: "", sephardic: "" }),
+        mixedAsh:
+          slidesData.siddurs?.siddur1?.mixedAsh ||
+          slidesData.siddurs?.siddur1?.ashkenazi ||
+          "",
+        mixedSep:
+          slidesData.siddurs?.siddur1?.mixedSep ||
+          slidesData.siddurs?.siddur1?.sephardic ||
+          ""
+      },
       siddur2: slidesData.siddurs?.siddur2 || "",
       siddur3: slidesData.siddurs?.siddur3 || "",
       siddur4: slidesData.siddurs?.siddur4 || ""
