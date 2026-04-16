@@ -17,6 +17,24 @@ body {
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  --viewport-height: 100vh;
+  --title-size: clamp(2.4rem, 3.8vw, 4rem);
+  --title-offset: clamp(20px, 3vw, 36px);
+  --logo-size: clamp(56px, 7vw, 112px);
+  --siddur-height: clamp(250px, 29.6vw, 334px);
+  --mixed-siddur-height: clamp(231px, 24.6vw, 278px);
+  --slide-number-top: 78%;
+  --slide-number-gap: clamp(93px, 12vw, 192px);
+  --slide-number-font-size: clamp(1rem, 3.4vw, 2.35rem);
+  --slide-digit-width: clamp(118px, 11.6vw, 168px);
+  --mixed-slide-number-gap: clamp(44px, 6vw, 92px);
+  --mixed-slide-digit-width: clamp(92px, 8.9vw, 132px);
+}
+
+@supports (height: 100dvh) {
+  body {
+    --viewport-height: 100dvh;
+  }
 }
 
 body::before {
@@ -147,7 +165,7 @@ button:disabled {
 .slideshow {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  height: var(--viewport-height);
   margin: 0;
   border-radius: 0;
   border: none;
@@ -190,14 +208,14 @@ button:disabled {
 
 .slide-title {
   position: absolute;
-  top: clamp(20px, 3vw, 36px);
+  top: var(--title-offset);
   left: 50%;
   transform: translateX(-50%);
   max-width: min(92%, 1320px);
   padding: 0 12px;
   font-family: "Gilroy", "Segoe UI", "Trebuchet MS", sans-serif;
   color: #e35205;
-  font-size: clamp(2.4rem, 3.8vw, 4rem);
+  font-size: var(--title-size);
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
@@ -217,32 +235,32 @@ button:disabled {
 }
 
 .slide-title.is-parsha-reading {
-  top: calc(clamp(20px, 3vw, 36px) + 150px);
+  top: calc(var(--title-offset) + 150px);
 }
 
 .slide-title.is-parsha-reading-ashkenazi-weekday {
-  top: calc(clamp(20px, 3vw, 36px) + 80px);
+  top: calc(var(--title-offset) + 80px);
 }
 
 :fullscreen .slide-title.is-parsha-reading,
 .slideshow:fullscreen .slide-title.is-parsha-reading,
 :-webkit-full-screen .slide-title.is-parsha-reading,
 .slideshow:-webkit-full-screen .slide-title.is-parsha-reading {
-  top: calc(clamp(20px, 3vw, 36px) + 200px);
+  top: calc(var(--title-offset) + 200px);
 }
 
 :fullscreen .slide-title.is-parsha-reading-ashkenazi-weekday,
 .slideshow:fullscreen .slide-title.is-parsha-reading-ashkenazi-weekday,
 :-webkit-full-screen .slide-title.is-parsha-reading-ashkenazi-weekday,
 .slideshow:-webkit-full-screen .slide-title.is-parsha-reading-ashkenazi-weekday {
-  top: calc(clamp(20px, 3vw, 36px) + 130px);
+  top: calc(var(--title-offset) + 130px);
 }
 
 .slide-logo {
   position: absolute;
   top: clamp(12px, 2vw, 26px);
   right: clamp(12px, 2vw, 22px);
-  width: clamp(56px, 7.4vw, 112px);
+  width: var(--logo-size);
   height: auto;
   object-fit: contain;
   filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
@@ -264,7 +282,7 @@ button:disabled {
 .siddur {
   position: absolute;
   width: auto;
-  height: clamp(250px, 29.6vw, 334px);
+  height: var(--siddur-height);
   max-width: none;
   border-radius: 24px;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.52));
@@ -275,13 +293,13 @@ button:disabled {
 
 .slide-number {
   position: absolute;
-  top: 78%;
+  top: var(--slide-number-top);
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  gap: clamp(93px, 12vw, 192px);
-  font-size: clamp(1rem, 3.4vw, 2.35rem);
+  gap: var(--slide-number-gap);
+  font-size: var(--slide-number-font-size);
   font-weight: 700; 
   color: rgba(255, 247, 226, 0.96);
   letter-spacing: 0.04em;
@@ -297,8 +315,8 @@ button:disabled {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: clamp(118px, 11.6vw, 168px);
-  flex: 0 0 clamp(118px, 11.6vw, 168px);
+  width: var(--slide-digit-width);
+  flex: 0 0 var(--slide-digit-width);
   font-family: "Open Sauce One", "Open Sauce", "Segoe UI", sans-serif;
   text-align: center;
   letter-spacing: 0;
@@ -317,16 +335,16 @@ button:disabled {
 }
 
 .slideshow.is-mixed .slide-number {
-  gap: clamp(44px, 6vw, 92px);
+  gap: var(--mixed-slide-number-gap);
 }
 
 .slideshow.is-mixed .slide-digit {
-  width: clamp(92px, 8.9vw, 132px);
-  flex: 0 0 clamp(92px, 8.9vw, 132px);
+  width: var(--mixed-slide-digit-width);
+  flex: 0 0 var(--mixed-slide-digit-width);
 }
 
 .slideshow.is-mixed .siddur {
-  height: clamp(231px, 24.6vw, 278px);
+  height: var(--mixed-siddur-height);
 }
 
 .nav {
@@ -388,6 +406,18 @@ button:disabled {
 }
 
 @media (max-width: 920px) {
+  body {
+    --title-size: clamp(1.2rem, 2.9vw, 1.85rem);
+    --logo-size: clamp(50px, 8vw, 82px);
+    --siddur-height: clamp(205px, 28vw, 278px);
+    --mixed-siddur-height: clamp(190px, 22vw, 242px);
+    --slide-number-gap: clamp(42px, 7vw, 96px);
+    --slide-number-font-size: clamp(0.92rem, 2.7vw, 1.8rem);
+    --slide-digit-width: clamp(72px, 10vw, 120px);
+    --mixed-slide-number-gap: clamp(20px, 4vw, 48px);
+    --mixed-slide-digit-width: clamp(58px, 8vw, 90px);
+  }
+
   .controls {
     justify-content: flex-start;
     margin: 10px 10px 0;
@@ -412,7 +442,7 @@ button:disabled {
 
   .slideshow {
     width: calc(100% - 14px);
-    height: calc(100vh - 176px);
+    height: calc(var(--viewport-height) - 176px);
     margin-top: 8px;
     border-radius: 12px;
   }
@@ -438,22 +468,30 @@ button:disabled {
     right: 12px;
   }
 
-  .siddur {
-    height: clamp(231px, 30.4vw, 278px);
-    top: calc(68% - clamp(154px, 19.8vw, 199px));
-  }
-
-  .slideshow.is-mixed .siddur {
-    height: clamp(212px, 23.9vw, 242px);
-  }
-
   .slide-title {
     max-width: calc(100% - 160px);
-    font-size: clamp(0.96rem, 2.3vw, 1.45rem);
+  }
+
+  .slide-number {
+    top: 74%;
   }
 }
 
 @media (max-width: 560px) {
+  body {
+    --title-offset: 14px;
+    --title-size: clamp(0.9rem, 4vw, 1.2rem);
+    --logo-size: clamp(42px, 13vw, 64px);
+    --siddur-height: clamp(120px, 26vw, 180px);
+    --mixed-siddur-height: clamp(108px, 22vw, 156px);
+    --slide-number-top: 70%;
+    --slide-number-gap: clamp(14px, 3.8vw, 28px);
+    --slide-number-font-size: clamp(0.78rem, 4.6vw, 1.08rem);
+    --slide-digit-width: clamp(46px, 15vw, 72px);
+    --mixed-slide-number-gap: clamp(8px, 2.5vw, 18px);
+    --mixed-slide-digit-width: clamp(34px, 11vw, 52px);
+  }
+
   .label {
     font-size: 10px;
   }
@@ -470,39 +508,79 @@ button:disabled {
   }
 
   .slideshow {
-    height: calc(100vh - 216px);
+    height: calc(var(--viewport-height) - 216px);
   }
 
   .slide-number {
-    top: 75%;
+    width: calc(100% - 30px);
+    justify-content: center;
   }
 
   .siddur {
-    height: clamp(194px, 30.9vw, 231px);
-    top: calc(68% - clamp(125px, 25.8vw, 156px));
-  }
-
-  .slideshow.is-mixed .slide-number {
-    gap: clamp(20px, 4vw, 42px);
-  }
-
-  .slideshow.is-mixed .slide-digit {
-    width: clamp(65px, 12.6vw, 97px);
-    flex: 0 0 clamp(65px, 12.6vw, 97px);
-  }
-
-  .slideshow.is-mixed .siddur {
-    height: clamp(175px, 26.5vw, 200px);
+    top: calc(62% - clamp(90px, 21vw, 120px));
   }
 
   .slide-title {
     max-width: calc(100% - 110px);
     padding: 7px 12px;
+    white-space: normal;
+    line-height: 1.05;
   }
 
   .slide-logo {
-    width: clamp(46px, 12vw, 72px);
     top: 10px;
     right: 10px;
+  }
+
+  .nav {
+    padding: 7px 10px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+  }
+
+  .counter {
+    padding: 7px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    --title-size: clamp(0.82rem, 4.2vw, 1rem);
+    --logo-size: clamp(36px, 12vw, 52px);
+    --siddur-height: clamp(92px, 22vw, 132px);
+    --mixed-siddur-height: clamp(84px, 19vw, 116px);
+    --slide-number-top: 68%;
+    --slide-number-gap: clamp(8px, 2vw, 16px);
+    --slide-number-font-size: clamp(0.72rem, 4vw, 0.92rem);
+    --slide-digit-width: clamp(36px, 13vw, 56px);
+    --mixed-slide-number-gap: clamp(5px, 1.8vw, 12px);
+    --mixed-slide-digit-width: clamp(28px, 9vw, 42px);
+  }
+
+  .controls {
+    gap: 8px 10px;
+    padding: 10px;
+  }
+
+  .slideshow {
+    width: calc(100% - 10px);
+    height: calc(var(--viewport-height) - 205px);
+    margin-top: 6px;
+    border-radius: 10px;
+  }
+
+  .nav.prev {
+    left: 10px;
+  }
+
+  .nav.next {
+    left: 68px;
+  }
+
+  .counter {
+    right: 10px;
+    bottom: 12px;
   }
 }
