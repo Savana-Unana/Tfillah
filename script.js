@@ -23,6 +23,7 @@ const setButtons = document.querySelectorAll(".set-btn");
 const previousButton = getById("prevBtn");
 const nextButton = getById("nextBtn");
 const fullscreenButton = getById("fullscreenBtn");
+const audioButton = getById("audioBtn");
 
 let currentSetId = "";
 let currentDayId = "";
@@ -31,6 +32,8 @@ let currentSlideEntry = null;
 let hasRenderedAtLeastOnce = false;
 let slideTransitionTimeout = null;
 let controlsHideTimeout = null;
+let slideAudioElement = null;
+let activeAudioSlideKey = "";
 
 const savedStateStorageKey = "tfillahSlideshowState";
 const parshaApiBaseUrl = "https://www.hebcal.com/hebcal";
@@ -87,6 +90,27 @@ const hanukkahTorahNameByHolidayTitle = {
   "hanukkah: 7 candles": "Chanukah Day 6",
   "hanukkah: 8 candles": "Chanukah Day 7",
   "hanukkah: 8th day": "Chanukah Day 8"
+};
+const slideAudioByName = {
+  aleinu: "audio/Aleinu.m4a",
+  ashrei: "audio/Ashrei.m4a",
+  "az yashir": "audio/AzYashir.m4a",
+  "el hahodaot": "audio/ElHahodaot.m4a",
+  haleluyah: "audio/Haleluah.m4a",
+  "haleluyah #1": "audio/Haleluah.m4a",
+  "haleluyah #3": "audio/Haleluah.m4a",
+  "haleluyah #5": "audio/Haleluah.m4a",
+  "lael baruch": "audio/LaelBaruch.m4a",
+  "mi chamocha": "audio/MiChamocha.m4a",
+  "betzet yisrael mimitzrayim": "audio/Mimitzraim.m4a",
+  mimitzrayim: "audio/Mimitzraim.m4a",
+  nagedisha: "audio/Nagedisha.m4a",
+  nekadesh: "audio/Nekadesh.m4a",
+  "sh'ma yisrael": "audio/Shema.m4a",
+  "shma yisrael": "audio/Shema.m4a",
+  "shema yisrael": "audio/Shema.m4a",
+  "uva letzion": "audio/UvaLetzion.m4a",
+  yishtabach: "audio/Yishtabach.m4a"
 };
 
 const toText = (value) => String(value ?? "").trim();
@@ -281,7 +305,7 @@ const getLabelById = (options, id) => options.find((option) => option.id === id)
 
 const normalizeSlideEntry = (entry) => {
   if (Array.isArray(entry)) {
-    return { slides: entry, background: "", name: "", title: "", logo: undefined, details: "", url: "" };
+    return { slides: entry, background: "", name: "", title: "", logo: undefined, details: "", url: "", audio: "" };
   }
 
   if (entry && typeof entry === "object") {
@@ -298,11 +322,12 @@ const normalizeSlideEntry = (entry) => {
       title: entry.title || "",
       logo: Object.prototype.hasOwnProperty.call(entry, "logo") ? entry.logo : undefined,
       details: toText(entry.details),
-      url: toText(entry.url || entry.link)
+      url: toText(entry.url || entry.link),
+      audio: toText(entry.audio || entry.audioUrl || entry.audioSrc || entry.sound)
     };
   }
 
-  return { slides: [entry], background: "", name: "", title: "", logo: undefined, details: "", url: "" };
+  return { slides: [entry], background: "", name: "", title: "", logo: undefined, details: "", url: "", audio: "" };
 };
 
 const getBackgroundForEntry = (entry) =>
@@ -345,6 +370,95 @@ const getAnnouncementUrl = (entry) => {
     return new URL(rawUrl, window.location.href).href;
   } catch {
     return "";
+  }
+};
+
+const getSlideAudioSource = (entry) => {
+  const rawSource = toText(entry?.audio);
+  const fallbackSource =
+    slideAudioByName[normalizeEntryName(entry?.name)] ||
+    slideAudioByName[normalizeEntryName(entry?.title)] ||
+    "";
+  const audioSource =
+    rawSource && !/[/\\]$/.test(rawSource) && /\.(aac|flac|m4a|mp3|oga|ogg|opus|wav|webm)([?#].*)?$/i.test(rawSource)
+      ? rawSource
+      : fallbackSource;
+  if (!audioSource) return "";
+
+  try {
+    return new URL(audioSource, window.location.href).href;
+  } catch {
+    return "";
+  }
+};
+
+const getCurrentSlideAudioKey = () => [currentSetId, currentDayId, currentSlideIndex].join(":");
+
+const getSlideAudioElement = () => {
+  if (slideAudioElement) return slideAudioElement;
+
+  slideAudioElement = new Audio();
+  slideAudioElement.preload = "metadata";
+  slideAudioElement.addEventListener("ended", () => {
+    activeAudioSlideKey = "";
+    updateAudioButtonState();
+  });
+  slideAudioElement.addEventListener("error", () => {
+    activeAudioSlideKey = "";
+    updateAudioButtonState();
+  });
+  slideAudioElement.addEventListener("pause", () => {
+    if (!slideAudioElement.ended) return;
+    activeAudioSlideKey = "";
+    updateAudioButtonState();
+  });
+  return slideAudioElement;
+};
+
+const stopSlideAudio = () => {
+  if (!slideAudioElement) return;
+  slideAudioElement.pause();
+  slideAudioElement.currentTime = 0;
+  activeAudioSlideKey = "";
+};
+
+const updateAudioButtonState = () => {
+  const audioSource = getSlideAudioSource(currentSlideEntry);
+  const isActive = !!audioSource && activeAudioSlideKey === getCurrentSlideAudioKey();
+
+  audioButton.disabled = !audioSource;
+  audioButton.textContent = audioSource ? (isActive ? "🔇" : "🔊") : "⛔";
+  audioButton.classList.toggle("active", isActive);
+  audioButton.setAttribute("aria-pressed", isActive ? "true" : "false");
+  audioButton.setAttribute(
+    "aria-label",
+    audioSource ? (isActive ? "Stop slide audio" : "Play slide audio") : "No audio attached to this slide"
+  );
+  audioButton.title = audioSource ? (isActive ? "Stop slide audio" : "Play slide audio") : "No audio attached to this slide";
+};
+
+const toggleCurrentSlideAudio = async () => {
+  const audioSource = getSlideAudioSource(currentSlideEntry);
+  if (!audioSource) return;
+
+  if (activeAudioSlideKey === getCurrentSlideAudioKey()) {
+    stopSlideAudio();
+    updateAudioButtonState();
+    return;
+  }
+
+  const audioElement = getSlideAudioElement();
+  activeAudioSlideKey = getCurrentSlideAudioKey();
+  audioElement.pause();
+  audioElement.src = audioSource;
+  audioElement.currentTime = 0;
+  updateAudioButtonState();
+
+  try {
+    await audioElement.play();
+  } catch {
+    activeAudioSlideKey = "";
+    updateAudioButtonState();
   }
 };
 
@@ -789,6 +903,7 @@ const renderCurrentSlide = () => {
     setSlideTitle(getDefaultTitle());
     setSlideLogo(brandingSettings.logo);
     clearAllSiddurs();
+    updateAudioButtonState();
     updateNavigationButtonLabels();
     saveState();
     return;
@@ -870,6 +985,7 @@ const renderCurrentSlide = () => {
   });
 
   requestAnimationFrame(() => positionSiddursOverSlideDigits(renderedSiddurSlots));
+  updateAudioButtonState();
   updateNavigationButtonLabels();
   saveState();
 };
@@ -909,6 +1025,7 @@ const ensureCurrentDayIsValid = () => {
 
 const changeSet = (setId) => {
   if (!slideCombos[setId]) return;
+  stopSlideAudio();
   currentSetId = setId;
   currentSlideIndex = 0;
   ensureCurrentDayIsValid();
@@ -917,7 +1034,7 @@ const changeSet = (setId) => {
 };
 
 slideshowElement.addEventListener("click", (event) => {
-  if (event.target.closest(".nav")) return;
+  if (event.target.closest(".nav") || event.target.closest(".audio-toggle")) return;
 
   const announcementUrl = getAnnouncementUrl(currentSlideEntry);
   if (!announcementUrl) return;
@@ -929,6 +1046,7 @@ const stepSlide = (direction) => {
   const slidesForSelection = getSlidesForCurrentSelection();
   if (!slidesForSelection.length) return;
 
+  stopSlideAudio();
   currentSlideIndex = (currentSlideIndex + direction + slidesForSelection.length) % slidesForSelection.length;
   updateSlide();
 };
@@ -939,6 +1057,7 @@ setButtons.forEach((button) => {
 
 previousButton.addEventListener("click", () => stepSlide(-1));
 nextButton.addEventListener("click", () => stepSlide(1));
+audioButton.addEventListener("click", toggleCurrentSlideAudio);
 
 fullscreenButton.addEventListener("click", () => {
   if (document.fullscreenElement) {
