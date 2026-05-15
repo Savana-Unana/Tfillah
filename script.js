@@ -91,28 +91,6 @@ const hanukkahTorahNameByHolidayTitle = {
   "hanukkah: 8 candles": "Chanukah Day 7",
   "hanukkah: 8th day": "Chanukah Day 8"
 };
-const slideAudioByName = {
-  aleinu: "audio/Aleinu.m4a",
-  ashrei: "audio/Ashrei.m4a",
-  "az yashir": "audio/AzYashir.m4a",
-  "el hahodaot": "audio/ElHahodaot.m4a",
-  haleluyah: "audio/Haleluah.m4a",
-  "haleluyah #1": "audio/Haleluah.m4a",
-  "haleluyah #3": "audio/Haleluah.m4a",
-  "haleluyah #5": "audio/Haleluah.m4a",
-  "lael baruch": "audio/LaelBaruch.m4a",
-  "mi chamocha": "audio/MiChamocha.m4a",
-  "betzet yisrael mimitzrayim": "audio/Mimitzraim.m4a",
-  mimitzrayim: "audio/Mimitzraim.m4a",
-  nagedisha: "audio/Nagedisha.m4a",
-  nekadesh: "audio/Nekadesh.m4a",
-  "sh'ma yisrael": "audio/Shema.m4a",
-  "shma yisrael": "audio/Shema.m4a",
-  "shema yisrael": "audio/Shema.m4a",
-  "uva letzion": "audio/UvaLetzion.m4a",
-  yishtabach: "audio/Yishtabach.m4a"
-};
-
 const toText = (value) => String(value ?? "").trim();
 const normalizeEntryName = (value) =>
   toText(value)
@@ -217,6 +195,7 @@ const buildDerivedMixedCombos = (combos) => {
   const ashkenaziCombos = combos?.ashkenazi;
   const sephardicCombos = combos?.sephardic;
   if (!ashkenaziCombos || !sephardicCombos) return combos || {};
+  if (combos?.mixedAsh && combos?.mixedSep) return combos;
 
   const dayIds = new Set([
     ...Object.keys(ashkenaziCombos || {}),
@@ -375,14 +354,10 @@ const getAnnouncementUrl = (entry) => {
 
 const getSlideAudioSource = (entry) => {
   const rawSource = toText(entry?.audio);
-  const fallbackSource =
-    slideAudioByName[normalizeEntryName(entry?.name)] ||
-    slideAudioByName[normalizeEntryName(entry?.title)] ||
-    "";
   const audioSource =
     rawSource && !/[/\\]$/.test(rawSource) && /\.(aac|flac|m4a|mp3|oga|ogg|opus|wav|webm)([?#].*)?$/i.test(rawSource)
       ? rawSource
-      : fallbackSource;
+      : "";
   if (!audioSource) return "";
 
   try {
