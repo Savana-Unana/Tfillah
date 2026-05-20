@@ -58,7 +58,10 @@ let activeHolidayFlags = {
   succos: false,
   fastDay: false,
   shabbat: false,
+  purim: false,
   fools: false,
+  holiday: false,
+  hallel: false,
   belated: false
 };
 const parshaNameAliases = {
@@ -109,7 +112,7 @@ const setDisplay = (element, showElement) => {
   element.style.display = showElement ? "block" : "none";
 };
 
-const holidayIds = ["chanukah", "roshChodesh", "succos", "fastDay", "shabbat", "purim", "fools", "belated"];
+const holidayIds = ["chanukah", "roshChodesh", "succos", "fastDay", "shabbat", "purim", "fools", "holiday", "hallel", "belated"];
 
 const clampSlideIndex = (index, length) => {
   if (!Number.isInteger(index) || length <= 0) return 0;
@@ -227,6 +230,8 @@ const createEmptyHolidayFlags = () => ({
   shabbat: false,
   purim: false,
   fools: false,
+  holiday: false,
+  hallel: false,
   belated: false
 });
 
@@ -244,6 +249,8 @@ const normalizeHolidayKey = (value) => {
   else if (["shabbat", "shabbos"].includes(normalized)) holidayKey = "shabbat";
   else if (["purim", "shushanpurim"].includes(normalized)) holidayKey = "purim";
   else if (["fools", "aprilfools", "aprilfool"].includes(normalized)) holidayKey = "fools";
+  else if (["holiday", "holidays", "yomtov", "yomimtovim"].includes(normalized)) holidayKey = "holiday";
+  else if (["hallel"].includes(normalized)) holidayKey = "hallel";
   else if (["belated"].includes(normalized)) holidayKey = "belated";
 
   return holidayKey ? { key: holidayKey, negated: isNegated } : null;
@@ -489,7 +496,7 @@ const getTorahSlidesForSelectedParsha = () => {
   const parsha = getSelectedParsha();
   if (!parsha) return null;
 
-  if (currentSetId === "mixed") {
+  if (currentSetId === "mixedAsh" || currentSetId === "mixedSep") {
     return [parsha.ashkenazPage, parsha.sephardiPage, parsha.chabadPage, parsha.translatedPage];
   }
 
@@ -497,15 +504,7 @@ const getTorahSlidesForSelectedParsha = () => {
     return [parsha.ashkenazPage, parsha.chabadPage, parsha.translatedPage];
   }
 
-  if (currentSetId === "mixedAsh") {
-    return [parsha.ashkenazPage, parsha.chabadPage, parsha.translatedPage];
-  }
-
   if (currentSetId === "sephardic") {
-    return [parsha.sephardiPage, parsha.chabadPage, parsha.translatedPage];
-  }
-
-  if (currentSetId === "mixedSep") {
     return [parsha.sephardiPage, parsha.chabadPage, parsha.translatedPage];
   }
 
@@ -692,9 +691,50 @@ const resolveActiveHolidays = async () => {
   const zmanimData = await zmanimResponse.json();
   const items = Array.isArray(data?.items) ? data.items : [];
   const nextHolidayFlags = createEmptyHolidayFlags();
+  const holidayTerms = [
+    "chanukah",
+    "hanukkah",
+    "rosh chodesh",
+    "purim",
+    "sukkot",
+    "sukkos",
+    "succot",
+    "succos",
+    "pesach",
+    "passover",
+    "shavuot",
+    "shavuos",
+    "rosh hashana",
+    "rosh hashanah",
+    "yom kippur",
+    "tu bishvat",
+    "tu b'shvat",
+    "lag baomer",
+    "lag b'omer",
+    "yom haatzmaut",
+    "yom ha'atzmaut",
+    "yom yerushalayim"
+  ];
+  const hallelTerms = [
+    "chanukah",
+    "hanukkah",
+    "rosh chodesh",
+    "sukkot",
+    "sukkos",
+    "succot",
+    "succos",
+    "pesach",
+    "passover",
+    "shavuot",
+    "shavuos",
+    "yom haatzmaut",
+    "yom ha'atzmaut",
+    "yom yerushalayim"
+  ];
 
   if (zmanimData?.status?.isAssurBemlacha === true) {
     nextHolidayFlags.shabbat = true;
+    nextHolidayFlags.holiday = true;
   }
 
   items.forEach((item) => {
@@ -702,8 +742,18 @@ const resolveActiveHolidays = async () => {
     const category = toText(item?.category).toLowerCase();
     const subcategory = toText(item?.subcat).toLowerCase();
 
+    if (holidayTerms.some((term) => title.includes(term))) {
+      nextHolidayFlags.holiday = true;
+    }
+
+    if (hallelTerms.some((term) => title.includes(term))) {
+      nextHolidayFlags.hallel = true;
+    }
+
     if (category === "roshchodesh") {
       nextHolidayFlags.roshChodesh = true;
+      nextHolidayFlags.holiday = true;
+      nextHolidayFlags.hallel = true;
     }
 
     if (subcategory === "fast") {
@@ -712,18 +762,24 @@ const resolveActiveHolidays = async () => {
 
     if (title.includes("shabbat") || title.includes("shabbos")) {
       nextHolidayFlags.shabbat = true;
+      nextHolidayFlags.holiday = true;
     }
 
     if (title.includes("chanukah") || title.includes("hanukkah")) {
       nextHolidayFlags.chanukah = true;
+      nextHolidayFlags.holiday = true;
+      nextHolidayFlags.hallel = true;
     }
 
     if (title.includes("purim")) {
       nextHolidayFlags.purim = true;
+      nextHolidayFlags.holiday = true;
     }
 
     if (["sukkot", "sukkos", "succot", "succos"].some((term) => title.includes(term))) {
       nextHolidayFlags.succos = true;
+      nextHolidayFlags.holiday = true;
+      nextHolidayFlags.hallel = true;
     }
   });
 
@@ -798,21 +854,23 @@ const isValidPageNumber = (value) => {
 
 const getActiveSiddurSlots = () => {
   const activeBaseSetId = getBaseSetId(currentSetId);
+  const ashkenaziSiddurSource = siddurSettings.siddur1?.ashkenazi || "";
+  const sephardicSiddurSource = siddurSettings.siddur1?.sephardic || "";
   const siddur1Source = siddurSettings.siddur1?.[activeBaseSetId] || "";
   const siddur2Source = siddurSettings.siddur2 || "";
   const siddur3Source = siddurSettings.siddur3 || "";
   const siddur4Source = siddurSettings.siddur4 || "";
 
-  if (currentSetId === "mixed") {
+  if (currentSetId === "mixedAsh" || currentSetId === "mixedSep") {
     return [
-      { element: siddurSlot1Element, source: siddur1Source },
-      { element: siddurSlot4Element, source: siddur4Source },
+      { element: siddurSlot1Element, source: ashkenaziSiddurSource },
+      { element: siddurSlot4Element, source: sephardicSiddurSource || siddur4Source },
       { element: siddurSlot2Element, source: siddur2Source },
       { element: siddurSlot3Element, source: siddur3Source }
     ];
   }
 
-  if (["ashkenazi", "sephardic", "mixedAsh", "mixedSep"].includes(currentSetId)) {
+  if (["ashkenazi", "sephardic"].includes(currentSetId)) {
     return [
       { element: siddurSlot1Element, source: siddur1Source },
       { element: siddurSlot2Element, source: siddur2Source },
@@ -988,7 +1046,10 @@ const updateActiveSetButton = () => {
   setButtons.forEach((button) => {
     button.classList.toggle("active", button.dataset.set === currentSetId);
   });
-  slideshowElement.classList.toggle("is-mixed", currentSetId === "mixed");
+  slideshowElement.classList.toggle(
+    "is-mixed",
+    currentSetId === "mixedAsh" || currentSetId === "mixedSep"
+  );
 };
 
 const ensureCurrentDayIsValid = () => {
