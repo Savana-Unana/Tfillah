@@ -23,9 +23,9 @@ body {
   --logo-size: clamp(56px, 7vw, 112px);
   --siddur-height: clamp(250px, 29.6vw, 334px);
   --mixed-siddur-height: clamp(231px, 24.6vw, 278px);
-  --slide-number-top: 78%;
+  --slide-number-top: 74.2%;
   --slide-number-gap: clamp(93px, 12vw, 192px);
-  --slide-number-font-size: clamp(1rem, 3.4vw, 2.35rem);
+  --slide-number-font-size: clamp(1.08rem, 3.65vw, 2.55rem);
   --slide-digit-width: clamp(118px, 11.6vw, 168px);
   --mixed-slide-number-gap: clamp(44px, 6vw, 92px);
   --mixed-slide-digit-width: clamp(92px, 8.9vw, 132px);
@@ -340,14 +340,16 @@ button:disabled {
   box-sizing: border-box;
   width: var(--slide-digit-width);
   flex: 0 0 var(--slide-digit-width);
+  height: calc(var(--slide-number-font-size) * 1.38);
   font-family: "Open Sauce One", "Open Sauce", "Segoe UI", sans-serif;
+  font-size: calc(var(--slide-number-font-size) * var(--slide-digit-scale, 1));
   text-align: center;
   letter-spacing: 0;
   line-height: 1;
   color: #ffffff;
   background: #000000;
   border-radius: 13px;
-  padding: 3px 10px 5px;
+  padding: 0 10px;
   white-space: nowrap;
   word-break: keep-all;
 }
@@ -435,7 +437,7 @@ button:disabled {
     --siddur-height: clamp(205px, 28vw, 278px);
     --mixed-siddur-height: clamp(190px, 22vw, 242px);
     --slide-number-gap: clamp(42px, 7vw, 96px);
-    --slide-number-font-size: clamp(0.92rem, 2.7vw, 1.8rem);
+    --slide-number-font-size: clamp(0.98rem, 2.9vw, 1.95rem);
     --slide-digit-width: clamp(72px, 10vw, 120px);
     --mixed-slide-number-gap: clamp(20px, 4vw, 48px);
     --mixed-slide-digit-width: clamp(58px, 8vw, 90px);
@@ -496,7 +498,7 @@ button:disabled {
   }
 
   .slide-number {
-    top: 74%;
+    top: 70.5%;
   }
 }
 
@@ -507,9 +509,9 @@ button:disabled {
     --logo-size: clamp(42px, 13vw, 64px);
     --siddur-height: clamp(120px, 26vw, 180px);
     --mixed-siddur-height: clamp(108px, 22vw, 156px);
-    --slide-number-top: 70%;
+    --slide-number-top: 67.2%;
     --slide-number-gap: clamp(14px, 3.8vw, 28px);
-    --slide-number-font-size: clamp(0.78rem, 4.6vw, 1.08rem);
+    --slide-number-font-size: clamp(0.84rem, 4.9vw, 1.16rem);
     --slide-digit-width: clamp(46px, 15vw, 72px);
     --mixed-slide-number-gap: clamp(8px, 2.5vw, 18px);
     --mixed-slide-digit-width: clamp(34px, 11vw, 52px);
@@ -574,9 +576,9 @@ button:disabled {
     --logo-size: clamp(36px, 12vw, 52px);
     --siddur-height: clamp(92px, 22vw, 132px);
     --mixed-siddur-height: clamp(84px, 19vw, 116px);
-    --slide-number-top: 68%;
+    --slide-number-top: 65.8%;
     --slide-number-gap: clamp(8px, 2vw, 16px);
-    --slide-number-font-size: clamp(0.72rem, 4vw, 0.92rem);
+    --slide-number-font-size: clamp(0.76rem, 4.3vw, 0.98rem);
     --slide-digit-width: clamp(36px, 13vw, 56px);
     --mixed-slide-number-gap: clamp(5px, 1.8vw, 12px);
     --mixed-slide-digit-width: clamp(28px, 9vw, 42px);

@@ -341,6 +341,15 @@ const getSlideTitle = (entry, slideIndex = currentSlideIndex) => {
   return `${setLabel}-${formattedDay}-${slideIndex + 1}`;
 };
 
+const getSlideDigitScale = (value) => {
+  const text = toText(value).replace(/\s+/g, "");
+  if (text.length >= 7) return 0.64;
+  if (text.length >= 6) return 0.7;
+  if (text.length >= 5) return 0.78;
+  if (text.length >= 4) return 0.88;
+  return 1;
+};
+
 const getSlideName = (entry, slideIndex) => {
   const explicitName = toText(entry?.name);
   if (explicitName) return explicitName;
@@ -965,7 +974,8 @@ const renderCurrentSlide = () => {
     .map((value) => {
       const showValue = hasVisibleSlideText(value);
       const className = showValue ? "slide-digit" : "slide-digit is-empty";
-      return `<span class="${className}">${showValue ? value : ""}</span>`;
+      const digitScale = showValue ? getSlideDigitScale(value) : 1;
+      return `<span class="${className}" style="--slide-digit-scale: ${digitScale}">${showValue ? value : ""}</span>`;
     })
     .join("");
 

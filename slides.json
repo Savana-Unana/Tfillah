@@ -9112,7 +9112,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/52.png",
+          "background": "backgrounds/74.png",
           "title": "‎"
         },
         {
@@ -9535,6 +9535,16 @@
           "details": "https://www.canva.com/design/DAHFAY6XQWo/a1BYn444okYbuSf5UOwDAQ/edit"
         },
         {
+          "name": "Lamnatzeach Mizmor",
+          "slides": [
+            "N/A"
+          ],
+          "audio": "audio/",
+          "background": "backgrounds/64.png",
+          "title": "‎",
+          "logo": ""
+        },
+        {
           "name": "Acheinu",
           "slides": [
             "N/A"
@@ -9692,7 +9702,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/52.png",
+          "background": "backgrounds/74.png",
           "title": "‎"
         },
         {
@@ -9779,6 +9789,7 @@
           "name": "Amidah",
           "slides": [
             "98-118",
+            "122-144",
             "45-54",
             "179-201"
           ],
@@ -10046,6 +10057,16 @@
           "background": "backgrounds/41.png",
           "title": "‎",
           "details": "https://www.canva.com/design/DAHFAY6XQWo/a1BYn444okYbuSf5UOwDAQ/edit"
+        },
+        {
+          "name": "Lamnatzeach Mizmor",
+          "slides": [
+            "N/A"
+          ],
+          "audio": "audio/",
+          "background": "backgrounds/64.png",
+          "title": "‎",
+          "logo": ""
         },
         {
           "name": "Acheinu",
@@ -10205,7 +10226,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/52.png",
+          "background": "backgrounds/74.png",
           "title": "‎"
         },
         {
@@ -10292,6 +10313,7 @@
           "name": "Amidah",
           "slides": [
             "98-118",
+            "122-144",
             "45-54",
             "179-201"
           ],
@@ -10561,6 +10583,16 @@
           "details": "https://www.canva.com/design/DAHFAY6XQWo/a1BYn444okYbuSf5UOwDAQ/edit"
         },
         {
+          "name": "Lamnatzeach Mizmor",
+          "slides": [
+            "N/A"
+          ],
+          "audio": "audio/",
+          "background": "backgrounds/64.png",
+          "title": "‎",
+          "logo": ""
+        },
+        {
           "name": "Acheinu",
           "slides": [
             "N/A"
@@ -10718,7 +10750,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/52.png",
+          "background": "backgrounds/74.png",
           "title": "‎"
         },
         {
@@ -10805,6 +10837,7 @@
           "name": "Amidah",
           "slides": [
             "98-118",
+            "122-144",
             "45-54",
             "179-201"
           ],
@@ -11140,6 +11173,16 @@
           "details": "https://www.canva.com/design/DAHFAY6XQWo/a1BYn444okYbuSf5UOwDAQ/edit"
         },
         {
+          "name": "Lamnatzeach Mizmor",
+          "slides": [
+            "N/A"
+          ],
+          "audio": "audio/",
+          "background": "backgrounds/64.png",
+          "title": "‎",
+          "logo": ""
+        },
+        {
           "name": "Acheinu",
           "slides": [
             "N/A"
@@ -11297,7 +11340,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/52.png",
+          "background": "backgrounds/74.png",
           "title": "‎"
         },
         {
@@ -11384,6 +11427,7 @@
           "name": "Amidah",
           "slides": [
             "98-118",
+            "122-144",
             "45-54",
             "179-201"
           ],
@@ -11651,6 +11695,16 @@
           "background": "backgrounds/41.png",
           "title": "‎",
           "details": "https://www.canva.com/design/DAHFAY6XQWo/a1BYn444okYbuSf5UOwDAQ/edit"
+        },
+        {
+          "name": "Lamnatzeach Mizmor",
+          "slides": [
+            "N/A"
+          ],
+          "audio": "audio/",
+          "background": "backgrounds/64.png",
+          "title": "‎",
+          "logo": ""
         },
         {
           "name": "Acheinu",
@@ -11719,7 +11773,7 @@
           "name": "Mizmor Letoda",
           "slides": [
             "64",
-            "82",
+            "84",
             "30",
             "127"
           ],
@@ -12502,7 +12556,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/27.png",
+          "background": "backgrounds/58.png",
           "title": "‎",
           "logo": ""
         },
@@ -12524,15 +12578,6 @@
           "background": "backgrounds/30.png",
           "title": "‎",
           "logo": ""
-        },
-        {
-          "name": "Torah",
-          "slides": [
-            "N/A"
-          ],
-          "audio": "audio/",
-          "background": "backgrounds/32.png",
-          "title": "‎"
         },
         {
           "name": "Kadish",
@@ -12690,7 +12735,7 @@
           "name": "Mizmor Letoda",
           "slides": [
             "64",
-            "82",
+            "84",
             "30",
             "127"
           ],
@@ -13473,7 +13518,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/27.png",
+          "background": "backgrounds/58.png",
           "title": "‎",
           "logo": ""
         },
@@ -13495,15 +13540,6 @@
           "background": "backgrounds/30.png",
           "title": "‎",
           "logo": ""
-        },
-        {
-          "name": "Torah",
-          "slides": [
-            "N/A"
-          ],
-          "audio": "audio/",
-          "background": "backgrounds/32.png",
-          "title": "‎"
         },
         {
           "name": "Kadish",
@@ -13661,7 +13697,7 @@
           "name": "Mizmor Letoda",
           "slides": [
             "64",
-            "82",
+            "84",
             "30",
             "127"
           ],
@@ -14444,7 +14480,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/27.png",
+          "background": "backgrounds/58.png",
           "title": "‎",
           "logo": ""
         },
@@ -14466,15 +14502,6 @@
           "background": "backgrounds/30.png",
           "title": "‎",
           "logo": ""
-        },
-        {
-          "name": "Torah",
-          "slides": [
-            "N/A"
-          ],
-          "audio": "audio/",
-          "background": "backgrounds/32.png",
-          "title": "‎"
         },
         {
           "name": "Kadish",
@@ -14632,7 +14659,7 @@
           "name": "Mizmor Letoda",
           "slides": [
             "64",
-            "82",
+            "84",
             "30",
             "127"
           ],
@@ -15415,7 +15442,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/27.png",
+          "background": "backgrounds/58.png",
           "title": "‎",
           "logo": ""
         },
@@ -15437,15 +15464,6 @@
           "background": "backgrounds/30.png",
           "title": "‎",
           "logo": ""
-        },
-        {
-          "name": "Torah",
-          "slides": [
-            "N/A"
-          ],
-          "audio": "audio/",
-          "background": "backgrounds/32.png",
-          "title": "‎"
         },
         {
           "name": "Kadish",
@@ -15603,7 +15621,7 @@
           "name": "Mizmor Letoda",
           "slides": [
             "64",
-            "82",
+            "84",
             "30",
             "127"
           ],
@@ -16386,7 +16404,7 @@
             "N/A"
           ],
           "audio": "audio/",
-          "background": "backgrounds/27.png",
+          "background": "backgrounds/58.png",
           "title": "‎",
           "logo": ""
         },
@@ -16408,15 +16426,6 @@
           "background": "backgrounds/30.png",
           "title": "‎",
           "logo": ""
-        },
-        {
-          "name": "Torah",
-          "slides": [
-            "N/A"
-          ],
-          "audio": "audio/",
-          "background": "backgrounds/32.png",
-          "title": "‎"
         },
         {
           "name": "Kadish",
