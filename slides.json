@@ -4432,7 +4432,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -4492,7 +4492,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -4504,7 +4504,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -4516,7 +4516,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -4528,7 +4528,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -4552,7 +4552,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -4560,7 +4560,7 @@
         {
           "name": "Yishtabach",
           "slides": [],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/12.png",
           "title": "‎",
           "logo": ""
@@ -4581,7 +4581,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -4591,7 +4591,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -4624,7 +4624,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -4634,7 +4634,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/55.png",
           "title": "‎"
         },
@@ -4677,7 +4677,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -4847,7 +4847,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -5016,7 +5016,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -5179,7 +5179,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -5269,7 +5269,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -5353,7 +5353,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -5413,7 +5413,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -5425,7 +5425,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -5437,7 +5437,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -5449,7 +5449,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -5473,7 +5473,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -5483,7 +5483,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -5503,7 +5503,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -5513,7 +5513,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -5546,7 +5546,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -5556,7 +5556,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/55.png",
           "title": "‎"
         },
@@ -5599,7 +5599,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -5769,7 +5769,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -5938,7 +5938,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -6101,7 +6101,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -6143,7 +6143,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -6153,7 +6153,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SUvaLetzion.m4a",
           "background": "backgrounds/61.png",
           "title": "‎",
           "logo": ""
@@ -6163,7 +6163,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/62.png",
           "title": "‎",
           "logo": ""
@@ -6238,7 +6238,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -6298,7 +6298,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -6310,7 +6310,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -6322,7 +6322,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -6334,7 +6334,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -6358,7 +6358,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -6368,7 +6368,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -6388,7 +6388,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -6398,7 +6398,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -6431,7 +6431,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -6441,7 +6441,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/55.png",
           "title": "‎"
         },
@@ -6484,7 +6484,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -6654,7 +6654,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -6823,7 +6823,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -6986,7 +6986,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -7028,7 +7028,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -7038,7 +7038,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SUvaLetzion.m4a",
           "background": "backgrounds/61.png",
           "title": "‎",
           "logo": ""
@@ -7048,7 +7048,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/62.png",
           "title": "‎",
           "logo": ""
@@ -7123,7 +7123,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -7183,7 +7183,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -7195,7 +7195,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -7207,7 +7207,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -7219,7 +7219,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -7243,7 +7243,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -7253,7 +7253,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -7273,7 +7273,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -7283,7 +7283,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -7316,7 +7316,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -7326,7 +7326,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/55.png",
           "title": "‎"
         },
@@ -7369,7 +7369,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -7539,7 +7539,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -7708,7 +7708,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -7871,7 +7871,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -7961,7 +7961,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -8045,7 +8045,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -8105,7 +8105,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -8117,7 +8117,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -8129,7 +8129,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -8141,7 +8141,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -8165,7 +8165,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -8175,7 +8175,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -8195,7 +8195,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -8205,7 +8205,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -8238,7 +8238,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -8248,7 +8248,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/55.png",
           "title": "‎"
         },
@@ -8291,7 +8291,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -8461,7 +8461,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -8630,7 +8630,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -8793,7 +8793,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -8835,7 +8835,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -8845,7 +8845,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SUvaLetzion.m4a",
           "background": "backgrounds/61.png",
           "title": "‎",
           "logo": ""
@@ -8855,7 +8855,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/62.png",
           "title": "‎",
           "logo": ""
@@ -11688,7 +11688,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -11740,7 +11740,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -11753,7 +11753,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -11766,7 +11766,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -11779,7 +11779,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -11805,7 +11805,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -11815,7 +11815,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -11836,7 +11836,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -11846,7 +11846,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -11881,7 +11881,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -11894,7 +11894,7 @@
             "44",
             "174"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/21.png",
           "title": "‎",
           "logo": ""
@@ -11927,7 +11927,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -11982,7 +11982,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -12163,7 +12163,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -12345,7 +12345,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -12564,7 +12564,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -12595,7 +12595,7 @@
             "80",
             "256"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAleinu.m4a",
           "background": "backgrounds/40.png",
           "title": "‎",
           "logo": ""
@@ -12650,7 +12650,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -12702,7 +12702,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -12715,7 +12715,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -12728,7 +12728,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -12741,7 +12741,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -12767,7 +12767,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -12777,7 +12777,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -12798,7 +12798,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -12808,7 +12808,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -12843,7 +12843,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -12856,7 +12856,7 @@
             "44",
             "174"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/21.png",
           "title": "‎",
           "logo": ""
@@ -12889,7 +12889,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -12944,7 +12944,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -13125,7 +13125,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -13307,7 +13307,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -13526,7 +13526,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -13557,7 +13557,7 @@
             "80",
             "256"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAleinu.m4a",
           "background": "backgrounds/40.png",
           "title": "‎",
           "logo": ""
@@ -13612,7 +13612,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -13664,7 +13664,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -13677,7 +13677,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -13690,7 +13690,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -13703,7 +13703,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -13729,7 +13729,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -13739,7 +13739,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -13760,7 +13760,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -13770,7 +13770,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -13805,7 +13805,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -13818,7 +13818,7 @@
             "44",
             "174"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/21.png",
           "title": "‎",
           "logo": ""
@@ -13851,7 +13851,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -13906,7 +13906,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -14087,7 +14087,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -14269,7 +14269,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -14488,7 +14488,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -14519,7 +14519,7 @@
             "80",
             "256"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAleinu.m4a",
           "background": "backgrounds/40.png",
           "title": "‎",
           "logo": ""
@@ -14574,7 +14574,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -14626,7 +14626,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -14639,7 +14639,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -14652,7 +14652,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -14665,7 +14665,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -14691,7 +14691,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -14701,7 +14701,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -14722,7 +14722,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -14732,7 +14732,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -14767,7 +14767,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -14780,7 +14780,7 @@
             "44",
             "174"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/21.png",
           "title": "‎",
           "logo": ""
@@ -14813,7 +14813,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -14868,7 +14868,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -15049,7 +15049,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -15231,7 +15231,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -15450,7 +15450,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -15481,7 +15481,7 @@
             "80",
             "256"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAleinu.m4a",
           "background": "backgrounds/40.png",
           "title": "‎",
           "logo": ""
@@ -15536,7 +15536,7 @@
             "6-8",
             "75-80"
           ],
-          "audio": "audio/",
+          "audio": "audio/SElHahodaot.m4a",
           "background": "backgrounds/2.png",
           "title": "‎",
           "logo": ""
@@ -15588,7 +15588,7 @@
             "31",
             "139"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -15601,7 +15601,7 @@
             "33",
             "142"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/6.png",
           "title": "‎",
           "logo": ""
@@ -15614,7 +15614,7 @@
             "34",
             "146"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/7.png",
           "title": "‎",
           "logo": ""
@@ -15627,7 +15627,7 @@
             "35",
             "150"
           ],
-          "audio": "audio/",
+          "audio": "audio/SHaleluah.m4a",
           "background": "backgrounds/8.png",
           "title": "‎",
           "logo": ""
@@ -15653,7 +15653,7 @@
             "37",
             "156"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAzYashir.m4a",
           "background": "backgrounds/10.png",
           "title": "‎",
           "logo": ""
@@ -15663,7 +15663,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SYishtabach.m4a",
           "background": "backgrounds/60.png",
           "title": "‎"
         },
@@ -15684,7 +15684,7 @@
             "38",
             "159"
           ],
-          "audio": "audio/",
+          "audio": "audio/SLaelBaruch.m4a",
           "background": "backgrounds/72.png",
           "title": "‎",
           "logo": ""
@@ -15694,7 +15694,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNekadesh.m4a",
           "background": "backgrounds/15.png",
           "title": "‎",
           "logo": ""
@@ -15729,7 +15729,7 @@
             "42",
             "169"
           ],
-          "audio": "audio/",
+          "audio": "audio/SShema.m4a",
           "background": "backgrounds/19.png",
           "title": "‎",
           "logo": ""
@@ -15742,7 +15742,7 @@
             "44",
             "174"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMiChamocha.m4a",
           "background": "backgrounds/21.png",
           "title": "‎",
           "logo": ""
@@ -15775,7 +15775,7 @@
           "slides": [
             "N/A"
           ],
-          "audio": "audio/",
+          "audio": "audio/SNagedisha.m4a",
           "background": "backgrounds/23.png",
           "title": "‎"
         },
@@ -15830,7 +15830,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holidays": [
@@ -16011,7 +16011,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "chanukah",
@@ -16193,7 +16193,7 @@
             "307",
             "487"
           ],
-          "audio": "audio/",
+          "audio": "audio/SMimitzraim.m4a",
           "background": "backgrounds/73.png",
           "title": "Betzet Yisrael Mimitzrayim",
           "holiday": "purim",
@@ -16412,7 +16412,7 @@
             "66",
             "246"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAshrei.m4a",
           "background": "backgrounds/5.png",
           "title": "‎",
           "logo": ""
@@ -16443,7 +16443,7 @@
             "80",
             "256"
           ],
-          "audio": "audio/",
+          "audio": "audio/SAleinu.m4a",
           "background": "backgrounds/40.png",
           "title": "‎",
           "logo": ""

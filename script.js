@@ -194,15 +194,42 @@ const buildMergedSetEntries = (primaryEntries, secondaryEntries) => [
   ...getUnmatchedEntries(primaryEntries, secondaryEntries)
 ];
 
+const getHechalSlideNumber = (entry) => {
+  const match = normalizeEntryName(entry?.name).match(/^opening the hechal (\d+)$/);
+  return match ? Number(match[1]) : null;
+};
+
+const isPlainHechalEntry = (entry) => normalizeEntryName(entry?.name) === "opening the hechal";
+
+const getNumberedHechalEntries = (entries) =>
+  entries
+    .filter((entry) => getHechalSlideNumber(entry) !== null)
+    .sort((firstEntry, secondEntry) => getHechalSlideNumber(firstEntry) - getHechalSlideNumber(secondEntry));
+
+const ensureNumberedHechalEntries = (entries, fallbackEntries) => {
+  const numberedHechalEntries = getNumberedHechalEntries(fallbackEntries);
+  if (numberedHechalEntries.length < 2 || getNumberedHechalEntries(entries).length >= 2) return entries;
+
+  const plainHechalIndex = entries.findIndex(isPlainHechalEntry);
+  if (plainHechalIndex === -1) return entries;
+
+  return [
+    ...entries.slice(0, plainHechalIndex),
+    ...numberedHechalEntries,
+    ...entries.slice(plainHechalIndex + 1)
+  ];
+};
+
 const buildDerivedMixedCombos = (combos) => {
   const ashkenaziCombos = combos?.ashkenazi;
   const sephardicCombos = combos?.sephardic;
   if (!ashkenaziCombos || !sephardicCombos) return combos || {};
-  if (combos?.mixedAsh && combos?.mixedSep) return combos;
 
   const dayIds = new Set([
     ...Object.keys(ashkenaziCombos || {}),
-    ...Object.keys(sephardicCombos || {})
+    ...Object.keys(sephardicCombos || {}),
+    ...Object.keys(combos?.mixedAsh || {}),
+    ...Object.keys(combos?.mixedSep || {})
   ]);
 
   const mixedAsh = {};
@@ -211,8 +238,17 @@ const buildDerivedMixedCombos = (combos) => {
   dayIds.forEach((dayId) => {
     const ashEntries = getComboEntries(combos, "ashkenazi", dayId);
     const sephardicEntries = getComboEntries(combos, "sephardic", dayId);
-    mixedAsh[dayId] = buildMergedSetEntries(ashEntries, sephardicEntries);
-    mixedSep[dayId] = buildMergedSetEntries(sephardicEntries, ashEntries);
+    const existingMixedAshEntries = getComboEntries(combos, "mixedAsh", dayId);
+    const existingMixedSepEntries = getComboEntries(combos, "mixedSep", dayId);
+
+    mixedAsh[dayId] = ensureNumberedHechalEntries(
+      existingMixedAshEntries.length ? existingMixedAshEntries : buildMergedSetEntries(ashEntries, sephardicEntries),
+      ashEntries
+    );
+    mixedSep[dayId] = ensureNumberedHechalEntries(
+      existingMixedSepEntries.length ? existingMixedSepEntries : buildMergedSetEntries(sephardicEntries, ashEntries),
+      sephardicEntries
+    );
   });
 
   return {
