@@ -14,7 +14,6 @@ const slideLogoElement = getById("slideLogo");
 const slideshowElement = getById("slideshow");
 const slideCanvasElement = getById("slideCanvas");
 const slideBackgroundElements = [getById("slideBackgroundA"), getById("slideBackgroundB")];
-const slideBackdropElements = [getById("slideBackdropA"), getById("slideBackdropB")];
 
 const siddurSlot1Element = getById("siddur1");
 const siddurSlot4Element = getById("siddur4");
@@ -37,6 +36,7 @@ let slideTransitionTimeout = null;
 let slideUpdateToken = 0;
 let activeBackgroundIndex = 0;
 const backgroundLoadCache = new Map();
+const edgeColorCache = new Map();
 let controlsHideTimeout = null;
 let slideAudioElement = null;
 let activeAudioSlideKey = "";
@@ -336,7 +336,7 @@ const getBaseSlidesForCurrentSelection = () => {
     : currentDayId;
 
   return getComboEntries(slideCombos, currentSetId, templateDayId)
-    .filter((entry) => currentDayId !== "sunday" || !["Yishtabach Explanation", "Ba’Aretz"].includes(entry?.name))
+    .filter((entry) => currentDayId !== "sunday" || entry?.name !== "Yishtabach Explanation")
     .filter(isHolidayEntryActive);
 };
 
@@ -405,21 +405,71 @@ const prepareBackgroundLayer = async (source) => {
 
   const nextIndex = 1 - activeBackgroundIndex;
   const nextLayer = slideBackgroundElements[nextIndex];
-  const nextBackdrop = slideBackdropElements[nextIndex];
   if (!source) {
     nextLayer.removeAttribute("src");
-    nextBackdrop.removeAttribute("src");
     return nextLayer;
   }
 
   nextLayer.src = source;
-  nextBackdrop.src = source;
   try {
-    await Promise.all([nextLayer.decode(), nextBackdrop.decode()]);
+    await nextLayer.decode();
   } catch {
-    if (!nextLayer.complete || !nextLayer.naturalWidth || !nextBackdrop.complete || !nextBackdrop.naturalWidth) return null;
+    if (!nextLayer.complete || !nextLayer.naturalWidth) return null;
   }
   return nextLayer;
+};
+
+const getDominantEdgeColor = (image, side) => {
+  const sample = document.createElement("canvas");
+  sample.width = 12;
+  sample.height = 96;
+  const context = sample.getContext("2d", { willReadFrequently: true });
+  if (!context) return "#161f20";
+
+  const stripWidth = Math.max(1, Math.round(image.naturalWidth * 0.03));
+  const sourceX = side === "left" ? 0 : image.naturalWidth - stripWidth;
+  context.drawImage(image, sourceX, 0, stripWidth, image.naturalHeight, 0, 0, sample.width, sample.height);
+
+  const pixels = context.getImageData(0, 0, sample.width, sample.height).data;
+  const groups = new Map();
+  for (let index = 0; index < pixels.length; index += 4) {
+    if (pixels[index + 3] < 128) continue;
+    const red = pixels[index];
+    const green = pixels[index + 1];
+    const blue = pixels[index + 2];
+    const key = `${red >> 5},${green >> 5},${blue >> 5}`;
+    const group = groups.get(key) || { count: 0, red: 0, green: 0, blue: 0 };
+    group.count += 1;
+    group.red += red;
+    group.green += green;
+    group.blue += blue;
+    groups.set(key, group);
+  }
+
+  const dominant = [...groups.values()].sort((first, second) => second.count - first.count)[0];
+  if (!dominant) return "#161f20";
+  return `rgb(${Math.round(dominant.red / dominant.count)}, ${Math.round(dominant.green / dominant.count)}, ${Math.round(dominant.blue / dominant.count)})`;
+};
+
+const setSideColors = (image) => {
+  const source = image.getAttribute("src");
+  if (!source || !image.naturalWidth) {
+    slideshowElement.style.setProperty("--side-left-color", "#161f20");
+    slideshowElement.style.setProperty("--side-right-color", "#161f20");
+    return;
+  }
+
+  let colors = edgeColorCache.get(source);
+  if (!colors) {
+    try {
+      colors = [getDominantEdgeColor(image, "left"), getDominantEdgeColor(image, "right")];
+    } catch {
+      colors = ["#161f20", "#161f20"];
+    }
+    edgeColorCache.set(source, colors);
+  }
+  slideshowElement.style.setProperty("--side-left-color", colors[0]);
+  slideshowElement.style.setProperty("--side-right-color", colors[1]);
 };
 
 const showBackgroundLayer = (layer) => {
@@ -428,10 +478,9 @@ const showBackgroundLayer = (layer) => {
   if (nextIndex === activeBackgroundIndex) return;
 
   layer.classList.add("is-active");
-  slideBackdropElements[nextIndex].classList.add("is-active");
   slideBackgroundElements[activeBackgroundIndex].classList.remove("is-active");
-  slideBackdropElements[activeBackgroundIndex].classList.remove("is-active");
   activeBackgroundIndex = nextIndex;
+  setSideColors(layer);
 };
 
 const preloadNeighborBackgrounds = () => {
