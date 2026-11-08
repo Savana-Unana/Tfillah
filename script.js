@@ -419,7 +419,7 @@ const prepareBackgroundLayer = async (source) => {
   return nextLayer;
 };
 
-const getDominantEdgeColor = (image, side) => {
+const getDominantLeftEdgeColor = (image) => {
   const sample = document.createElement("canvas");
   sample.width = 12;
   sample.height = 96;
@@ -427,8 +427,7 @@ const getDominantEdgeColor = (image, side) => {
   if (!context) return "#161f20";
 
   const stripWidth = Math.max(1, Math.round(image.naturalWidth * 0.03));
-  const sourceX = side === "left" ? 0 : image.naturalWidth - stripWidth;
-  context.drawImage(image, sourceX, 0, stripWidth, image.naturalHeight, 0, 0, sample.width, sample.height);
+  context.drawImage(image, 0, 0, stripWidth, image.naturalHeight, 0, 0, sample.width, sample.height);
 
   const pixels = context.getImageData(0, 0, sample.width, sample.height).data;
   const groups = new Map();
@@ -451,25 +450,23 @@ const getDominantEdgeColor = (image, side) => {
   return `rgb(${Math.round(dominant.red / dominant.count)}, ${Math.round(dominant.green / dominant.count)}, ${Math.round(dominant.blue / dominant.count)})`;
 };
 
-const setSideColors = (image) => {
+const setSideColor = (image) => {
   const source = image.getAttribute("src");
   if (!source || !image.naturalWidth) {
-    slideshowElement.style.setProperty("--side-left-color", "#161f20");
-    slideshowElement.style.setProperty("--side-right-color", "#161f20");
+    slideshowElement.style.setProperty("--side-color", "#161f20");
     return;
   }
 
-  let colors = edgeColorCache.get(source);
-  if (!colors) {
+  let color = edgeColorCache.get(source);
+  if (!color) {
     try {
-      colors = [getDominantEdgeColor(image, "left"), getDominantEdgeColor(image, "right")];
+      color = getDominantLeftEdgeColor(image);
     } catch {
-      colors = ["#161f20", "#161f20"];
+      color = "#161f20";
     }
-    edgeColorCache.set(source, colors);
+    edgeColorCache.set(source, color);
   }
-  slideshowElement.style.setProperty("--side-left-color", colors[0]);
-  slideshowElement.style.setProperty("--side-right-color", colors[1]);
+  slideshowElement.style.setProperty("--side-color", color);
 };
 
 const showBackgroundLayer = (layer) => {
@@ -480,7 +477,7 @@ const showBackgroundLayer = (layer) => {
   layer.classList.add("is-active");
   slideBackgroundElements[activeBackgroundIndex].classList.remove("is-active");
   activeBackgroundIndex = nextIndex;
-  setSideColors(layer);
+  setSideColor(layer);
 };
 
 const preloadNeighborBackgrounds = () => {

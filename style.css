@@ -161,7 +161,7 @@ button:disabled {
   margin: 0;
   border-radius: 0;
   border: none;
-  background: linear-gradient(90deg, var(--side-left-color, #161f20) 0 50%, var(--side-right-color, #161f20) 50% 100%);
+  background: var(--side-color, #161f20);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
