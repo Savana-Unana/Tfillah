@@ -1,0 +1,10 @@
+{
+  "name": "tfillah-slideshow",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Local T'fillah slideshow",
+  "scripts": {
+    "dev": "node dev-server.mjs",
+    "start": "node dev-server.mjs"
+  }
+}

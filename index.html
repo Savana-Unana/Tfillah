@@ -26,19 +26,23 @@
     </header>
 
     <main class="slideshow" id="slideshow">
-      <img id="slideImage" alt="Slideshow image" />
-      <div class="slide-title" id="slideTitle"></div>
-      <img id="slideLogo" class="slide-logo" alt="Slide logo" />
-      <div class="siddur-layer" aria-hidden="true">
-        <img id="siddur1" class="siddur siddur-1" alt="" />
-        <div class="slide-number" id="slideNumber">0</div>
-        <img id="siddur4" class="siddur siddur-4" alt="" />
-        <img id="siddur2" class="siddur siddur-2" alt="" />
-        <img id="siddur3" class="siddur siddur-3" alt="" />
+      <div class="slide-canvas" id="slideCanvas">
+        <img id="slideBackgroundA" class="slide-background is-active" alt="" />
+        <img id="slideBackgroundB" class="slide-background" alt="" />
+        <img id="slideImage" alt="Slideshow image" />
+        <div class="slide-title" id="slideTitle"></div>
+        <img id="slideLogo" class="slide-logo" alt="Slide logo" />
+        <div class="siddur-layer" aria-hidden="true">
+          <img id="siddur1" class="siddur siddur-1" alt="" />
+          <div class="slide-number" id="slideNumber">0</div>
+          <img id="siddur4" class="siddur siddur-4" alt="" />
+          <img id="siddur2" class="siddur siddur-2" alt="" />
+          <img id="siddur3" class="siddur siddur-3" alt="" />
+        </div>
+        <button class="nav prev" id="prevBtn" aria-label="Previous image">Prev</button>
+        <button class="nav next" id="nextBtn" aria-label="Next image">Next</button>
+        <div class="counter" id="counter"></div>
       </div>
-      <button class="nav prev" id="prevBtn" aria-label="Previous image">Prev</button>
-      <button class="nav next" id="nextBtn" aria-label="Next image">Next</button>
-      <div class="counter" id="counter"></div>
     </main> 
     <script src="script.js"></script>
   </body> 

@@ -12,6 +12,8 @@ const slideCounterElement = getById("counter");
 const slideTitleElement = getById("slideTitle");
 const slideLogoElement = getById("slideLogo");
 const slideshowElement = getById("slideshow");
+const slideCanvasElement = getById("slideCanvas");
+const slideBackgroundElements = [getById("slideBackgroundA"), getById("slideBackgroundB")];
 
 const siddurSlot1Element = getById("siddur1");
 const siddurSlot4Element = getById("siddur4");
@@ -31,6 +33,9 @@ let currentSlideIndex = 0;
 let currentSlideEntry = null;
 let hasRenderedAtLeastOnce = false;
 let slideTransitionTimeout = null;
+let slideUpdateToken = 0;
+let activeBackgroundIndex = 0;
+const backgroundLoadCache = new Map();
 let controlsHideTimeout = null;
 let slideAudioElement = null;
 let activeAudioSlideKey = "";
@@ -38,8 +43,6 @@ let activeAudioSlideKey = "";
 const savedStateStorageKey = "tfillahSlideshowState";
 const parshaApiBaseUrl = "https://www.hebcal.com/hebcal";
 const holidayApiBaseUrl = "https://www.hebcal.com/hebcal";
-const zmanimApiBaseUrl = "https://www.hebcal.com/zmanim";
-const shabbatZipCode = "33150";
 
 let siddurSettings = {
   siddur1: { ashkenazi: "", sephardic: "" },
@@ -154,9 +157,13 @@ const hideControlsSoon = () => {
   }, 220);
 };
 
-const requestFullscreen = () => {
+const requestFullscreen = async () => {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen?.();
+    try {
+      await document.documentElement.requestFullscreen?.();
+    } catch {
+      // Mirroring hosts can deny fullscreen; keep the windowed slideshow usable.
+    }
   }
 };
 
@@ -318,8 +325,19 @@ const isHolidayEntryActive = (entry) => {
   );
 };
 
-const getBaseSlidesForCurrentSelection = () =>
-  getComboEntries(slideCombos, currentSetId, currentDayId).filter(isHolidayEntryActive);
+const getBaseSlidesForCurrentSelection = () => {
+  const templateDayId = activeHolidayFlags.chanukah && currentDayId !== "saturday"
+    ? "monday"
+    : currentDayId === "sunday"
+    ? "tuesday"
+    : currentDayId === "saturday"
+    ? "monday"
+    : currentDayId;
+
+  return getComboEntries(slideCombos, currentSetId, templateDayId)
+    .filter((entry) => currentDayId !== "sunday" || !["Yishtabach Explanation", "Ba’Aretz"].includes(entry?.name))
+    .filter(isHolidayEntryActive);
+};
 
 const getSlidesForCurrentSelection = () => getBaseSlidesForCurrentSelection();
 
@@ -340,6 +358,7 @@ const normalizeSlideEntry = (entry) => {
     return {
       slides,
       background: entry.background || "",
+      backgroundPageNumber: toText(entry.backgroundPageNumber),
       name: entry.name || "",
       title: entry.title || "",
       logo: Object.prototype.hasOwnProperty.call(entry, "logo") ? entry.logo : undefined,
@@ -354,6 +373,68 @@ const normalizeSlideEntry = (entry) => {
 
 const getBackgroundForEntry = (entry) =>
   entry?.background || dropdownBackgroundById[currentDayId] || buttonBackgroundById[currentSetId] || "";
+
+const preloadBackground = (source) => {
+  if (!source) return Promise.resolve(true);
+  if (backgroundLoadCache.has(source)) return backgroundLoadCache.get(source);
+
+  const loaded = new Promise((resolve) => {
+    const image = new Image();
+    image.onload = async () => {
+      try {
+        await image.decode();
+      } catch {
+        // A loaded image can still be displayed if decoding is unsupported.
+      }
+      resolve(true);
+    };
+    image.onerror = () => {
+      backgroundLoadCache.delete(source);
+      resolve(false);
+    };
+    image.src = source;
+  });
+  backgroundLoadCache.set(source, loaded);
+  return loaded;
+};
+
+const prepareBackgroundLayer = async (source) => {
+  const activeLayer = slideBackgroundElements[activeBackgroundIndex];
+  if (activeLayer.getAttribute("src") === source) return activeLayer;
+
+  const nextLayer = slideBackgroundElements[1 - activeBackgroundIndex];
+  if (!source) {
+    nextLayer.removeAttribute("src");
+    return nextLayer;
+  }
+
+  nextLayer.src = source;
+  try {
+    await nextLayer.decode();
+  } catch {
+    if (!nextLayer.complete || !nextLayer.naturalWidth) return null;
+  }
+  return nextLayer;
+};
+
+const showBackgroundLayer = (layer) => {
+  if (!layer) return;
+  const nextIndex = slideBackgroundElements.indexOf(layer);
+  if (nextIndex === activeBackgroundIndex) return;
+
+  layer.classList.add("is-active");
+  slideBackgroundElements[activeBackgroundIndex].classList.remove("is-active");
+  activeBackgroundIndex = nextIndex;
+};
+
+const preloadNeighborBackgrounds = () => {
+  const entries = getSlidesForCurrentSelection();
+  if (entries.length < 2) return;
+  for (const offset of [-1, 1]) {
+    const entry = entries[(currentSlideIndex + offset + entries.length) % entries.length];
+    void preloadBackground(getBackgroundForEntry(entry));
+  }
+};
 
 const getDefaultTitle = () =>
   [getLabelById(buttonOptions, currentSetId), getLabelById(dropdownOptions, currentDayId)]
@@ -375,15 +456,6 @@ const getSlideTitle = (entry, slideIndex = currentSlideIndex) => {
   const dayShort = dayLabel.slice(0, 3);
   const formattedDay = dayShort ? `${dayShort[0].toUpperCase()}${dayShort.slice(1).toLowerCase()}` : "Day";
   return `${setLabel}-${formattedDay}-${slideIndex + 1}`;
-};
-
-const getSlideDigitScale = (value) => {
-  const text = toText(value).replace(/\s+/g, "");
-  if (text.length >= 7) return 0.64;
-  if (text.length >= 6) return 0.7;
-  if (text.length >= 5) return 0.78;
-  if (text.length >= 4) return 0.88;
-  return 1;
 };
 
 const getSlideName = (entry, slideIndex) => {
@@ -614,10 +686,6 @@ const getEffectiveNow = () => {
 };
 
 const resolveCurrentDayId = () => {
-  if (activeHolidayFlags.chanukah) {
-    return "monday";
-  }
-
   const params = new URLSearchParams(window.location.search);
   const dayOverride = toText(params.get("day")).toLowerCase();
   if (dayOverride && dropdownOptions.some((option) => option.id === dayOverride)) {
@@ -626,7 +694,7 @@ const resolveCurrentDayId = () => {
 
   const derivedDay = weekdayByIndex[getEffectiveNow().getDay()] || "";
   if (derivedDay === "sunday" || derivedDay === "saturday") {
-    return "monday";
+    return derivedDay;
   }
   if (dropdownOptions.some((option) => option.id === derivedDay)) {
     return derivedDay;
@@ -724,18 +792,10 @@ const resolveActiveHolidays = async () => {
     throw new Error(`Holiday lookup failed with status ${response.status}`);
   }
 
-  const zmanimUrl = `${zmanimApiBaseUrl}?cfg=json&im=1&zip=${encodeURIComponent(shabbatZipCode)}&dt=${encodeURIComponent(
-    today.toISOString()
-  )}`;
-  const zmanimResponse = await fetch(zmanimUrl);
-  if (!zmanimResponse.ok) {
-    throw new Error(`Zmanim lookup failed with status ${zmanimResponse.status}`);
-  }
-
   const data = await response.json();
-  const zmanimData = await zmanimResponse.json();
   const items = Array.isArray(data?.items) ? data.items : [];
   const nextHolidayFlags = createEmptyHolidayFlags();
+  nextHolidayFlags.shabbat = today.getDay() === 6;
   const holidayTerms = [
     "chanukah",
     "hanukkah",
@@ -777,11 +837,6 @@ const resolveActiveHolidays = async () => {
     "yom yerushalayim"
   ];
 
-  if (zmanimData?.status?.isAssurBemlacha === true) {
-    nextHolidayFlags.shabbat = true;
-    nextHolidayFlags.holiday = true;
-  }
-
   items.forEach((item) => {
     const title = normalizeHolidayTitle(item?.title || item?.title_orig);
     const category = toText(item?.category).toLowerCase();
@@ -806,7 +861,6 @@ const resolveActiveHolidays = async () => {
     }
 
     if (title.includes("shabbat") || title.includes("shabbos")) {
-      nextHolidayFlags.shabbat = true;
       nextHolidayFlags.holiday = true;
     }
 
@@ -926,45 +980,16 @@ const getActiveSiddurSlots = () => {
   return [];
 };
 
-const positionSiddursOverSlideDigits = (activeSiddurSlots) => {
-  const slideDigitElements = Array.from(slideNumberElement.querySelectorAll(".slide-digit"));
-  const slideshowRect = slideshowElement.getBoundingClientRect();
-  const positionedSlots = [];
-
-  activeSiddurSlots.forEach(({ element, slotIndex }) => {
-    const digitElement = slideDigitElements[slotIndex];
-    if (!digitElement || element.style.display === "none") return;
-
-    const digitRect = digitElement.getBoundingClientRect();
-    const centerX = digitRect.left - slideshowRect.left + digitRect.width / 2;
-    positionedSlots.push({ element, centerX });
-  });
-
-  if (!positionedSlots.length) return;
-
-  positionedSlots.forEach(({ element, centerX }) => {
-    element.style.left = `${centerX}px`;
-  });
-
-  const groupLeft = Math.min(
-    ...positionedSlots.map(({ element }) => parseFloat(element.style.left) - element.offsetWidth / 2)
-  );
-  const groupRight = Math.max(
-    ...positionedSlots.map(({ element }) => parseFloat(element.style.left) + element.offsetWidth / 2)
-  );
-  const groupCenterX = (groupLeft + groupRight) / 2;
-  const centerOffset = slideshowRect.width / 2 - groupCenterX;
-
-  positionedSlots.forEach(({ element, centerX }) => {
-    element.style.left = `${centerX + centerOffset}px`;
-  });
-};
-
 const clearAllSiddurs = () => {
   allSiddurElements.forEach((element) => setSiddurImage(element, ""));
 };
 
-const renderCurrentSlide = () => {
+const sizeSlideCanvas = () => {
+  const rect = slideshowElement.getBoundingClientRect();
+  slideCanvasElement.style.setProperty("--canvas-scale", Math.max(0.001, Math.min(rect.width / 1920, rect.height / 1080)));
+};
+
+const renderCurrentSlide = (preparedBackgroundLayer) => {
   const slidesForSelection = getSlidesForCurrentSelection();
 
   if (!slidesForSelection.length) {
@@ -974,8 +999,9 @@ const renderCurrentSlide = () => {
     slideNumberElement.textContent = "0 0 0";
     slideCounterElement.textContent = "0 / 0";
 
-    const fallbackBackground = getBackgroundForEntry(null);
-    slideshowElement.style.backgroundImage = fallbackBackground ? `url('${fallbackBackground}')` : "";
+    showBackgroundLayer(preparedBackgroundLayer);
+    slideCanvasElement.dataset.backgroundPage = "";
+    sizeSlideCanvas();
     slideshowElement.classList.remove("is-clickable");
 
     setSlideTitle(getDefaultTitle());
@@ -1010,37 +1036,33 @@ const renderCurrentSlide = () => {
     .map((value) => {
       const showValue = hasVisibleSlideText(value);
       const className = showValue ? "slide-digit" : "slide-digit is-empty";
-      const digitScale = showValue ? getSlideDigitScale(value) : 1;
-      return `<span class="${className}" style="--slide-digit-scale: ${digitScale}">${showValue ? value : ""}</span>`;
+      return `<span class="${className}">${showValue ? value : ""}</span>`;
     })
     .join("");
 
   slideCounterElement.textContent = `${currentSlideIndex + 1} / ${slidesForSelection.length}`;
 
   const backgroundImage = getBackgroundForEntry(currentEntry);
-  slideshowElement.style.backgroundImage = backgroundImage ? `url('${backgroundImage}')` : "";
+  showBackgroundLayer(preparedBackgroundLayer);
+  // This full-text image has a baked-in page label. Preserve the Sephardic
+  // reference from the original slide with a label scaled to the image.
+  slideCanvasElement.dataset.backgroundPage = currentEntry.backgroundPageNumber || "";
+  sizeSlideCanvas();
   slideshowElement.classList.toggle("is-clickable", !!getAnnouncementUrl(currentEntry));
 
   const baseTitle = getSlideTitle(currentEntry, currentSlideIndex);
   const parshaTitle = activeParshaLabel || selectedParshaName;
   const isParshaReadingSlide = backgroundImage === "backgrounds/30.png";
-  const isAshkenaziWeekdayParshaReading = currentSetId === "ashkenazi" && ["monday", "thursday"].includes(currentDayId);
-  const titleText = entryIsTorah && parshaTitle
-    ? isParshaReadingSlide
-      ? `Parsha: ${parshaTitle}`
-      : `${baseTitle} : ${parshaTitle}`
+  const titleText = entryIsTorah && isParshaReadingSlide && parshaTitle
+    ? `Parsha: ${parshaTitle}`
     : baseTitle;
   slideTitleElement.classList.toggle("is-parsha-reading", entryIsTorah && isParshaReadingSlide && !!parshaTitle);
-  slideTitleElement.classList.toggle(
-    "is-parsha-reading-ashkenazi-weekday",
-    entryIsTorah && isParshaReadingSlide && !!parshaTitle && isAshkenaziWeekdayParshaReading
-  );
   setSlideTitle(titleText);
   setSlideLogo(currentEntry.logo !== undefined ? currentEntry.logo : brandingSettings.logo);
 
   const siddurSlots = getActiveSiddurSlots();
   const slotCount = siddurSlots.length;
-  const renderedSiddurSlots = [];
+  slideNumberElement.style.setProperty("--slot-count", slotCount || 3);
   const activeSlotElements = new Set(siddurSlots.map((slot) => slot.element));
 
   allSiddurElements.forEach((element) => {
@@ -1060,29 +1082,36 @@ const renderCurrentSlide = () => {
 
     element.style.setProperty("--slot-index", slotIndex);
     element.style.setProperty("--slot-count", slotCount);
-    renderedSiddurSlots.push({ element, slotIndex });
+    element.style.left = `${10 + ((slotIndex + 0.5) * 80) / slotCount}%`;
   });
 
-  requestAnimationFrame(() => positionSiddursOverSlideDigits(renderedSiddurSlots));
   updateAudioButtonState();
   updateNavigationButtonLabels();
   saveState();
+  preloadNeighborBackgrounds();
 };
 
-const updateSlide = ({ animate = true } = {}) => {
+const updateSlide = async ({ animate = true } = {}) => {
+  const updateToken = ++slideUpdateToken;
   const shouldAnimate = animate && hasRenderedAtLeastOnce;
   clearTimeout(slideTransitionTimeout);
+  slideshowElement.classList.remove("transitioning");
+
+  const targetEntry = getSlidesForCurrentSelection()[currentSlideIndex];
+  const preparedBackgroundLayer = await prepareBackgroundLayer(getBackgroundForEntry(targetEntry));
+  if (updateToken !== slideUpdateToken) return;
+  if (!preparedBackgroundLayer) return;
 
   if (!shouldAnimate) {
-    slideshowElement.classList.remove("transitioning");
-    renderCurrentSlide();
+    renderCurrentSlide(preparedBackgroundLayer);
     hasRenderedAtLeastOnce = true;
     return;
   }
 
   slideshowElement.classList.add("transitioning");
   slideTransitionTimeout = setTimeout(() => {
-    renderCurrentSlide();
+    if (updateToken !== slideUpdateToken) return;
+    renderCurrentSlide(preparedBackgroundLayer);
     requestAnimationFrame(() => slideshowElement.classList.remove("transitioning"));
     slideTransitionTimeout = null;
   }, 130);
@@ -1099,6 +1128,7 @@ const updateActiveSetButton = () => {
 };
 
 const ensureCurrentDayIsValid = () => {
+  if (currentDayId === "sunday" || currentDayId === "saturday") return;
   if (slideCombos[currentSetId]?.[currentDayId]) return;
 
   const availableDays = Object.keys(slideCombos[currentSetId] || {});
@@ -1170,7 +1200,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 window.addEventListener("resize", () => {
-  updateSlide({ animate: false });
+  sizeSlideCanvas();
 });
 
 document.addEventListener("mousemove", (event) => {
@@ -1191,10 +1221,8 @@ document.addEventListener(
 document.addEventListener("click", requestFullscreen, { once: true });
 document.addEventListener("keydown", requestFullscreen, { once: true });
 document.addEventListener("fullscreenchange", () => {
-  if (!document.fullscreenElement) requestFullscreen();
+  sizeSlideCanvas();
 });
-
-requestFullscreen();
 
 const parseOptions = (items) =>
   Array.isArray(items)
