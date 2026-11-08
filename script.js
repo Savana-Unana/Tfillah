@@ -14,6 +14,7 @@ const slideLogoElement = getById("slideLogo");
 const slideshowElement = getById("slideshow");
 const slideCanvasElement = getById("slideCanvas");
 const slideBackgroundElements = [getById("slideBackgroundA"), getById("slideBackgroundB")];
+const slideBackdropElements = [getById("slideBackdropA"), getById("slideBackdropB")];
 
 const siddurSlot1Element = getById("siddur1");
 const siddurSlot4Element = getById("siddur4");
@@ -402,17 +403,21 @@ const prepareBackgroundLayer = async (source) => {
   const activeLayer = slideBackgroundElements[activeBackgroundIndex];
   if (activeLayer.getAttribute("src") === source) return activeLayer;
 
-  const nextLayer = slideBackgroundElements[1 - activeBackgroundIndex];
+  const nextIndex = 1 - activeBackgroundIndex;
+  const nextLayer = slideBackgroundElements[nextIndex];
+  const nextBackdrop = slideBackdropElements[nextIndex];
   if (!source) {
     nextLayer.removeAttribute("src");
+    nextBackdrop.removeAttribute("src");
     return nextLayer;
   }
 
   nextLayer.src = source;
+  nextBackdrop.src = source;
   try {
-    await nextLayer.decode();
+    await Promise.all([nextLayer.decode(), nextBackdrop.decode()]);
   } catch {
-    if (!nextLayer.complete || !nextLayer.naturalWidth) return null;
+    if (!nextLayer.complete || !nextLayer.naturalWidth || !nextBackdrop.complete || !nextBackdrop.naturalWidth) return null;
   }
   return nextLayer;
 };
@@ -423,7 +428,9 @@ const showBackgroundLayer = (layer) => {
   if (nextIndex === activeBackgroundIndex) return;
 
   layer.classList.add("is-active");
+  slideBackdropElements[nextIndex].classList.add("is-active");
   slideBackgroundElements[activeBackgroundIndex].classList.remove("is-active");
+  slideBackdropElements[activeBackgroundIndex].classList.remove("is-active");
   activeBackgroundIndex = nextIndex;
 };
 
